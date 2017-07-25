@@ -1,18 +1,17 @@
 require 'CSV'
 
-class ItemRepo
 
-  attr_reader :items
+class MerchantRepo
+
+  attr_reader :merchants
 
   def initialize(file)
-    @items = []
-    # create_items(file)
+    @merchants = []
   end
 
   def create_items(file)
       CSV.foreach(file, :headers => true, :header_converters => :symbol, :converters => :all) do |row|
-      items <<  Item.new(row)
-      end
-  end
-
+      items <<  Merchant.new(row)
+    end
+  end  
 end

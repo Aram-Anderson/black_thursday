@@ -1,10 +1,31 @@
 require './lib/item_repo'
+require './lib/merchant_repo'
+require 'pry'
 
 class SalesEngine
 
-  attr_reader :item_repo
+def initialize
+  @init_hash = init_hash
+end
 
-  def initialize
-    @item_repo = ItemRepo.new
+  def self.from_csv(init_hash={})
+    @init_hash = init_hash
+    ItemRepo.new(init_hash[:items])
+    MerchantRepo.new(init_hash[:merchants])
   end
+
+
+
+  # attr_reader :item_repo
+
+  # def initialize
+  #   @item_repo = ItemRepo.new
+  #
+  #   {:items     => "./data/items.csv",
+  #   :merchants => "./data/merchants.csv",}
+  # end
+
+
+
+
 end
