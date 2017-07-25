@@ -16,24 +16,13 @@ class SalesEngine
     @item_repo     = ItemRepo.new(init_hash[:items], self)
   end
 
-  def items()
-    @item_repo.item
-  end
-
   def merchants
-    @merchant_repo.merchants
+    merchant_repo.merchants
   end
 
-  # attr_reader :item_repo
-
-  # def initialize
-  #   @item_repo = ItemRepo.new
-  #
-  #   {:items     => "./data/items.csv",
-  #   :merchants => "./data/merchants.csv",}
-  # end
-
-
+  def items
+    @item_repo.all
+  end
 
 
 end
