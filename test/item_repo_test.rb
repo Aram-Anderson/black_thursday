@@ -1,21 +1,27 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/emoji'
-require './lib/item_repo'
+require './lib/sales_engine'
+require 'pry'
 
 
 class ItemRepoTest < Minitest::Test
 
-  def test_it_exists
-    repo = ItemRepo.new
+  def setup
+    @se = SalesEngine.from_csv({
+    :items     => "./data/items.csv",
+    :merchants => "./data/merchants.csv"})
+  end
 
-    assert_instance_of ItemRepo, repo
+  def test_it_exists
+
+
+    assert_instance_of ItemRepo, @se.item_repo.items
   end
 
   def test_it_initializes_with_an_empty_array_for_items
-    repo = ItemRepo.new
-
-    assert_equal [], repo.items
+    binding.pry
+    assert_equal [], se.item_repo.items
   end
 
 end
