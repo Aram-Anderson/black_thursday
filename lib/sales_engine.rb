@@ -4,17 +4,25 @@ require 'pry'
 
 class SalesEngine
 
-def initialize
-  @init_hash = init_hash
-end
-
-  def self.from_csv(init_hash={})
-    @init_hash = init_hash
-    ItemRepo.new(init_hash[:items])
-    MerchantRepo.new(init_hash[:merchants])
+  def self.from_csv(init_hash)
+    sales_engine = SalesEngine.new(init_hash)
   end
 
+  attr_reader :item_repo,
+              :merchant_repo
 
+  def initialize(init_hash)
+    @merchant_repo = MerchantRepo.new(init_hash[:merchants], self)
+    @item_repo     = ItemRepo.new(init_hash[:items], self)
+  end
+
+  def items()
+    @item_repo.item
+  end
+
+  def merchants
+    @merchant_repo.merchants
+  end
 
   # attr_reader :item_repo
 

@@ -4,9 +4,9 @@ class ItemRepo
 
   attr_reader :items
 
-  def initialize(file)
+  def initialize(file, sales_engine)
     @items = []
-    # create_items(file)
+    @sales_engine = sales_engine
   end
 
   def create_items(file)
