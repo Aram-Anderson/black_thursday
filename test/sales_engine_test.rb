@@ -1,6 +1,6 @@
 require 'minitest'
 require 'minitest/autorun'
-require 'minitest/emoji'
+require 'minitest/pride'
 require './lib/sales_engine'
 require 'pry'
 
@@ -42,4 +42,11 @@ class SalesEngineTest < Minitest::Test
 
     assert_equal 1, merchant.items(12334112).count
   end
+
+  def test_it_can_find_merchants_from_instance_of_item
+
+    item = @se.items.find_all_by_merchant_id(12334195)
+    assert_equal "FlavienCouche", item.merchant(12334195).name
+  end
+
 end

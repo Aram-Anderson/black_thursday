@@ -17,7 +17,7 @@ class ItemRepo
 
   def create_items(file)
       CSV.foreach(file, :headers => true, :header_converters => :symbol, :converters => :all) do |row|
-      @items <<  Item.new(row)
+      @items <<  Item.new(row, self)
       end
   end
 
@@ -55,9 +55,8 @@ class ItemRepo
     end
   end
 
-  # def by_merchant(merchant)
-  #   @items.find_all do |item|
-  #     item.merchant_id == merchant[:id]
-  #   end
-  # end
+  def merchant(merchant_id)
+    
+    @sales_engine.merchant(merchant_id)
+  end
 end
