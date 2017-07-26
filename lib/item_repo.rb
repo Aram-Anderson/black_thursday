@@ -57,6 +57,5 @@ class ItemRepo
 
   def merchant(merchant_id)
     @sales_engine.merchant(merchant_id)
-    binding.pry
   end
 end

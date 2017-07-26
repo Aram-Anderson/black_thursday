@@ -28,7 +28,6 @@ class Item
 
   def merchant(merchant_id = @merchant_id)
     @item_repo.merchant(merchant_id)
-    binding.pry
   end
 
 end
