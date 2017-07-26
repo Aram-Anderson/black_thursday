@@ -9,7 +9,7 @@ require 'pry'
 class MerchantTest < Minitest::Test
 
   def setup
-    @merchant = Merchant.new({:id => 2, :name => "Frank", :created_at => 6, :updated_at => 7})
+    @merchant = Merchant.new({:id => 2, :name => "Frank", :created_at => 6, :updated_at => 7}, "merchants")
   end
 
   def test_it_has_an_id

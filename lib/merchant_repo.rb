@@ -16,7 +16,7 @@ class MerchantRepo
 
   def create_merchants(file)
       CSV.foreach(file, :headers => true, :header_converters => :symbol, :converters => :all) do |row|
-      @merchants <<  Merchant.new(row)
+      @merchants <<  Merchant.new(row, self)
     end
   end
 
@@ -34,5 +34,9 @@ class MerchantRepo
 
   def find_all_by_name(frag)
     @merchants.find_all {|object| object.name.downcase.include? frag.downcase}
+  end
+
+  def item(merchant_id)
+    @sales_engine.item(merchant_id)
   end
 end

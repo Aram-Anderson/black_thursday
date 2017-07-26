@@ -15,9 +15,6 @@ class SalesEngineTest < Minitest::Test
 
   def test_sales_engine_init_from_spec
 
-  se = SalesEngine.from_csv({
-  :items     => "./data/items.csv",
-  :merchants => "./data/merchants.csv"})
   assert_instance_of MerchantRepo, @se.merchants
   assert_instance_of ItemRepo, @se.items
 
@@ -40,4 +37,9 @@ class SalesEngineTest < Minitest::Test
     assert_instance_of MerchantRepo, @se.merchants
   end
 
+  def test_it_can_find_items_from_instance_of_merchant
+    merchant = @se.merchants.find_by_id(12334112)
+
+    assert_equal 1, merchant.item(12334112).count
+  end
 end

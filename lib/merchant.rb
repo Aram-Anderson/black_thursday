@@ -8,11 +8,17 @@ class Merchant
               :created_at,
               :updated_at
 
-  def initialize(data)
+  def initialize(data, merchants)
     @id         = data[:id]
     @name       = data[:name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
+    @merchant_repo = merchants
   end
+
+  def item(merchant_id = @id)
+    @merchant_repo.item(merchant_id)
+  end
+
 
 end

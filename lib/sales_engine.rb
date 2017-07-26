@@ -18,4 +18,12 @@ class SalesEngine
     @items     = ItemRepo.new(init_hash[:items], self)
   end
 
+  def item(merchant_id)
+    @items.find_all_by_merchant_id(merchant_id)
+  end
+  #
+  # def merchant(item)
+  #   @merchants.by_item(item)
+  # end
+
 end

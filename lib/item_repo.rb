@@ -1,6 +1,7 @@
 require 'CSV'
 require './lib/item'
 require 'simplecov'
+require 'pry'
 SimpleCov.start
 
 class ItemRepo
@@ -54,4 +55,9 @@ class ItemRepo
     end
   end
 
+  # def by_merchant(merchant)
+  #   @items.find_all do |item|
+  #     item.merchant_id == merchant[:id]
+  #   end
+  # end
 end

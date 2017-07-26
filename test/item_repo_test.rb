@@ -43,20 +43,18 @@ class ItemRepoTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_description
-    skip
-    input = "Glitter scrabble frames \
--\
--Any colour glitter \
--Any wording\
--\
--Available colour scrabble tiles\
--Pink\
--Blue\
--Black\
--Wooden\""
-expected = 9477675
+    input = "Glitter scrabble frames \n" +
+    "\n" +
+    "Any colour glitter \n" +
+    "Any wording\n" +
+    "\n" +
+    "Available colour scrabble tiles\n" +
+    "Pink\n" +
+    "Blue\n" +
+    "Black\n" +
+    "Wooden"
 
-    assert_equal expected, @ir.find_all_with_description(input)
+    assert_equal 1, @ir.find_all_with_description(input).count
   end
 
   def test_it_can_find_all_by_price
