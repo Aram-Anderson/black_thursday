@@ -7,7 +7,7 @@ require 'pry'
 class ItemTest < Minitest::Test
 
   def setup
-    @item = Item.new({:id => 44, :name => "Stuff 4 Sale", :description => "Junk", :unit_price => 7465, :merchant_id => 332, :created_at => 54, :updated_at => 75})
+    @item = Item.new({:id => 44, :name => "Stuff 4 Sale", :description => "Junk", :unit_price => 7465, :merchant_id => 332, :created_at => 54, :updated_at => 75}, "merchant_id")
   end
 
   def test_it_has_an_id

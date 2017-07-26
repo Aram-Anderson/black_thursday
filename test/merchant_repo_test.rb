@@ -31,7 +31,6 @@ class MerchantRepoTest < Minitest::Test
   end
 
   def test_it_can_find_by_id
-
     assert_equal "JUSTEmonsters", @mr.find_by_id(12334165).name
   end
 
@@ -42,7 +41,7 @@ class MerchantRepoTest < Minitest::Test
 
   def test_it_can_find_all_by_name_fragment
 
-    assert_equal 5, @mr.find_all_by_name("Gran").count  
+    assert_equal 5, @mr.find_all_by_name("Gran").count
   end
 
 end
