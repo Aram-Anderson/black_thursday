@@ -2,6 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/emoji'
 require './lib/item'
+require 'pry'
 
 class ItemTest < Minitest::Test
 
@@ -44,7 +45,7 @@ class ItemTest < Minitest::Test
   end
 
   def test_it_can_convert_unit_price_to_dollars
-
+  binding.pry
     assert_equal 74.65, @item.unit_price_to_dollars
   end
 end
