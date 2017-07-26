@@ -23,8 +23,8 @@ class SalesEngine
   end
 
   def merchant(merchant_id)
-    
     @merchants.find_by_id(merchant_id)
+    binding.pry
   end
 
 end

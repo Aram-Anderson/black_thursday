@@ -25,7 +25,7 @@ class MerchantRepo
   end
 
   def find_by_id(id)
-    @merchants.find {|object| object.id == id }
+    @merchants.find { |object| object.id == id }
   end
 
   def find_by_name(name)
