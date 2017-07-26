@@ -16,7 +16,7 @@ class Merchant
     @merchant_repo = merchants
   end
 
-  def item(merchant_id = @id)
+  def items(merchant_id = @id)
     @merchant_repo.item(merchant_id)
   end
 
