@@ -1,5 +1,7 @@
 require 'CSV'
 require './lib/item'
+require 'simplecov'
+SimpleCov.start
 
 class ItemRepo
 

@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 class Merchant
 
   attr_reader :id,

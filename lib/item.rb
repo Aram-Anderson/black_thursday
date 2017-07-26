@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 class Item
 
   attr_reader :id,
@@ -19,7 +22,7 @@ class Item
   end
 
   def unit_price_to_dollars
-    (@unit_price / 100).round(2)
+    @unit_price.to_f / 100
   end
 
 end

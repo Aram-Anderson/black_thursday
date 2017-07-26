@@ -25,6 +25,11 @@ class ItemRepoTest < Minitest::Test
     refute @ir.items.empty?
   end
 
+  def test_it_can_add_all
+
+    assert_equal 1367, @ir.all.count
+  end
+
   def test_it_can_find_by_id
     expected = "Glitter scrabble frames"
 

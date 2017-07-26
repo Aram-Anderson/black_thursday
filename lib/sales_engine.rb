@@ -1,6 +1,8 @@
 require './lib/item_repo'
 require './lib/merchant_repo'
 require 'pry'
+require 'simplecov'
+SimpleCov.start
 
 class SalesEngine
 

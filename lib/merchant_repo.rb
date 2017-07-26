@@ -1,5 +1,7 @@
 require './lib/merchant'
 require 'CSV'
+require 'simplecov'
+SimpleCov.start
 
 
 class MerchantRepo
@@ -30,7 +32,7 @@ class MerchantRepo
     @merchants.find {|object| object.name.downcase == name.downcase }
   end
 
-  def find_all_by_name(name_frag)
-    @merchants.find_all {|object| object.name.downcase.include? name_frag.downcase}
+  def find_all_by_name(frag)
+    @merchants.find_all {|object| object.name.downcase.include? frag.downcase}
   end
 end
