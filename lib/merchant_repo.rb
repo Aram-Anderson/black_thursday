@@ -18,5 +18,19 @@ class MerchantRepo
     end
   end
 
+  def all
+    @merchants
+  end
 
+  def find_by_id(id)
+    @merchants.find {|object| object.id == id }
+  end
+
+  def find_by_name(name)
+    @merchants.find {|object| object.name.downcase == name.downcase }
+  end
+
+  def find_all_by_name(name_frag)
+    @merchants.find_all {|object| object.name.downcase.include? name_frag.downcase}
+  end
 end
