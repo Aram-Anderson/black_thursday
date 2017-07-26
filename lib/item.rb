@@ -16,6 +16,7 @@ class Item
     @merchant_id  = data[:merchant_id]
     @created_at   = data[:created_at]
     @updated_at   = data[:updated_at]
+    @unit_price_to_dollars = (@unit_price / 100).round(2)
   end
 
 end

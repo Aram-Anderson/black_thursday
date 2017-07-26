@@ -30,23 +30,25 @@ class ItemRepo
     @items.find { |object| object.name.downcase == name.downcase }
   end
 
-  def find_all_with_description(describe, stuff = [])
-    stuff << @items.find_all do |object| object.description.downcase == describe.downcase
+  def find_all_with_description(describe)
+    stuff = @items.find_all do |object|
+      object.description.to_s.downcase == describe.downcase
     end
-    stuff.compact
+    stuff
   end
 
-  def find_all_by_price(cost, cost = [])
-    @items.find_all {|object| object.unit_price == cost }
-    cost.compact
+  def find_all_by_price(cost)
+    objects = @items.find_all {|object| object.unit_price == cost }
   end
 
   def find_all_by_price_in_range(range, prices = [])
     @items.each do |x|
-      if x.unit_price.cover?(range)
+      if range.cover?(x.unit_price)
         prices << x
       end
     end
+    prices
+  end
 
   def find_all_by_merchant_id(id, capitalists = [])
     @items.each do |object|
@@ -54,5 +56,6 @@ class ItemRepo
         capitalists << object
       end
     end
+    capitalists
   end
 end

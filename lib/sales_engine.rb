@@ -17,7 +17,7 @@ class SalesEngine
   end
 
   def merchants
-    merchant_repo.merchants
+    @merchant_repo.merchants
   end
 
   def items
