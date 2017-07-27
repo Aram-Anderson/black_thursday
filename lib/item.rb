@@ -1,5 +1,5 @@
-require 'simplecov'
-SimpleCov.start
+require 'time'
+require 'bigdecimal'
 
 class Item
 
@@ -15,19 +15,20 @@ class Item
     @id           = data[:id]
     @name         = data[:name]
     @description  = data[:description]
-    @unit_price   = data[:unit_price]
+    @price        = BigDecimal.new(data[:unit_price])
+    @unit_price   = unit_price_to_dollars(@price)
     @merchant_id  = data[:merchant_id]
-    @created_at   = data[:created_at]
-    @updated_at   = data[:updated_at]
+    @created_at   = Time.parse(data[:created_at])
+    @updated_at   = Time.parse(data[:updated_at])
     @item_repo    = item_repo
   end
 
-  def unit_price_to_dollars
-    @unit_price.to_f / 100
+  def unit_price_to_dollars(price)
+    price / 100
   end
 
   def merchant(merchant_id = @merchant_id)
-    @item_repo.merchant(merchant_id)
+    item_repo.merchant(merchant_id)
   end
 
 end
