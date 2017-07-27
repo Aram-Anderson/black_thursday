@@ -1,8 +1,8 @@
-require './lib/item_repo'
-require './lib/merchant_repo'
+require_relative 'item_repo'
+require_relative 'merchant_repo'
 require 'pry'
-require 'simplecov'
-SimpleCov.start
+# require 'simplecov'
+# SimpleCov.start
 
 class SalesEngine
 
@@ -24,6 +24,14 @@ class SalesEngine
 
   def merchant(merchant_id)
     @merchants.find_by_id(merchant_id)
+  end
+
+  def average_items_per_merchant
+    (@items.all.count.to_f / @merchants.all.count.to_f).round(2)
+  end
+
+  def average_items_per_merchant_standard_deviation
+    @items.average_items_per_merchant_standard_deviation
   end
 
 end

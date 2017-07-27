@@ -45,9 +45,9 @@ class SalesEngineTest < Minitest::Test
 
   def test_it_can_find_merchants_from_instance_of_item
 
-    item = @se.items.find_all_by_merchant_id(12334195).first
+    item = @se.items.find_by_id(263395617)
 
-    assert_equal "FlavienCouche", item.merchant(12334195).name
+    assert_equal "Madewithgitterxx", item.merchant(12334185).name
   end
 
 end

@@ -1,7 +1,7 @@
-require './lib/merchant'
+require_relative 'merchant'
 require 'CSV'
-require 'simplecov'
-SimpleCov.start
+# require 'simplecov'
+# SimpleCov.start
 
 
 class MerchantRepo
