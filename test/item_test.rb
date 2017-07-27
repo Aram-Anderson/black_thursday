@@ -26,7 +26,7 @@ class ItemTest < Minitest::Test
 
   def test_it_has_a_unit_price
 
-    assert_equal 0.7465e2, @item.unit_price
+    assert_equal BigDecimal, @item.unit_price.class
   end
 
   def test_it_has_a_merchant_id

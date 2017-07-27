@@ -62,4 +62,7 @@ class ItemRepo
     @sales_engine.merchant(merchant_id)
   end
 
+  # def average_items_per_merchant_standard_deviation
+  #   average_items_per_merchant_standard_deviation
+  # end
 end

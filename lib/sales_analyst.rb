@@ -1,4 +1,7 @@
+require_relative 'sales_analyst_math'
+
 class SalesAnalyst
+  include SalesAnalystMath
 
   def initialize(engine)
     @engine = engine

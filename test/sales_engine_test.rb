@@ -37,13 +37,6 @@ class SalesEngineTest < Minitest::Test
     assert_instance_of MerchantRepo, @se.merchants
   end
 
-  def test_it_can_find_items_from_instance_of_merchant
-    merchant = @se.merchants.find_by_id(12334112)
-
-    assert_equal 1, merchant.items.count
-    binding.pry
-  end
-
   def test_it_can_find_merchants_from_instance_of_item
 
     item = @se.items.find_by_id(263395617)
