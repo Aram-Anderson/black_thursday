@@ -1,9 +1,7 @@
 require 'CSV'
 require_relative 'item'
-# require 'simplecov'
 require 'pry'
 require 'bigdecimal'
-# SimpleCov.start
 
 class ItemRepo
 
@@ -17,7 +15,8 @@ class ItemRepo
   end
 
   def create_items(file)
-      CSV.foreach(file, :headers => true, :header_converters => :symbol, :converters => :all) do |row|
+      CSV.foreach(file, :headers => true, :header_converters => :symbol,
+      :converters => :all) do |row|
       @items <<  Item.new(row, self)
       end
   end
@@ -84,4 +83,5 @@ class ItemRepo
     end
     counts.values
   end
-  end
+
+end

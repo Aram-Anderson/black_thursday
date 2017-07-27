@@ -1,7 +1,5 @@
 require_relative 'merchant'
 require 'CSV'
-# require 'simplecov'
-# SimpleCov.start
 
 
 class MerchantRepo

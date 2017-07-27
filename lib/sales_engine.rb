@@ -1,8 +1,6 @@
 require_relative 'item_repo'
 require_relative 'merchant_repo'
 require 'pry'
-# require 'simplecov'
-# SimpleCov.start
 
 class SalesEngine
 

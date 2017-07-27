@@ -1,12 +1,10 @@
-# require 'simplecov'
-# SimpleCov.start
-
 class Merchant
 
   attr_reader :id,
               :name,
               :created_at,
-              :updated_at
+              :updated_at,
+              :merchant_id
 
   def initialize(data, merchants)
     @id         = data[:id]
@@ -16,7 +14,7 @@ class Merchant
     @merchant_repo = merchants
   end
 
-  def items(merchant_id = @id)
+  def items
     @merchant_repo.item(merchant_id)
   end
 

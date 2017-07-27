@@ -58,11 +58,11 @@ class ItemRepoTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_price
-    assert_equal 41, @ir.find_all_by_price(1200).count
+    assert_equal 41, @ir.find_all_by_price(12.00).count
   end
 
   def test_it_can_find_all_in_price_range
-    assert_equal 356, @ir.find_all_by_price_in_range(1200..2500).count
+    assert_equal 356, @ir.find_all_by_price_in_range(12.00..25.00).count
   end
 
   def test_it_can_find_all_by_merchant_id

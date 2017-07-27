@@ -10,5 +10,5 @@ class SalesAnalyst
 
   def average_items_per_merchant_standard_deviation
     @engine.average_items_per_merchant_standard_deviation
-  end  
+  end
 end

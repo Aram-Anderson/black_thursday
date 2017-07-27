@@ -18,8 +18,8 @@ class Item
     @price        = BigDecimal.new(data[:unit_price])
     @unit_price   = unit_price_to_dollars(@price)
     @merchant_id  = data[:merchant_id]
-    @created_at   = Time.parse(data[:created_at])
-    @updated_at   = Time.parse(data[:updated_at])
+    @created_at   = Time.parse(data[:created_at].to_s)
+    @updated_at   = Time.parse(data[:updated_at].to_s)
     @item_repo    = item_repo
   end
 
@@ -27,8 +27,8 @@ class Item
     price / 100
   end
 
-  def merchant(merchant_id = @merchant_id)
-    item_repo.merchant(merchant_id)
+  def merchant
+    @item_repo.merchant(merchant_id)
   end
 
 end
