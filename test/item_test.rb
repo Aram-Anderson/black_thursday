@@ -2,6 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/emoji'
 require './lib/item'
+require 'pry'
 
 class ItemTest < Minitest::Test
 
