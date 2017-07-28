@@ -1,6 +1,8 @@
-require_relative 'item_repo'
-require_relative 'merchant_repo'
+require './lib/item_repo'
+require './lib/merchant_repo'
 require 'pry'
+require 'simplecov'
+SimpleCov.start
 
 class SalesEngine
 
@@ -32,8 +34,17 @@ class SalesEngine
     @items.average_items_per_merchant_standard_deviation
   end
 
-  def merchants_with_highest_item_count
-    @items.merchants_with_highest_item_count
+  def merchants_with_high_item_count
+    @items.merchants_with_high_item_count
+  end
+
+  def get_high_achivers(count_hash)
+    @merchants.get_high_achivers(count_hash)
+  end
+
+  def average_item_price_for_merchant(merchant_id)
+  arr_of_items = @items.find_all_by_merchant_id(merchant_id)
+  @items.average_item_price_for_merchant(arr_of_items)
   end
 
 end

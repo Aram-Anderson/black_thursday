@@ -1,8 +1,8 @@
 require 'CSV'
-require_relative 'item'
+require './lib/item'
+require 'simplecov'
 require 'pry'
-require 'bigdecimal'
-
+SimpleCov.start
 
 class ItemRepo
 
@@ -16,8 +16,7 @@ class ItemRepo
   end
 
   def create_items(file)
-      CSV.foreach(file, :headers => true, :header_converters => :symbol,
-      :converters => :all) do |row|
+      CSV.foreach(file, :headers => true, :header_converters => :symbol, :converters => :all) do |row|
       @items <<  Item.new(row, self)
       end
   end
@@ -44,7 +43,7 @@ class ItemRepo
     @items.find_all {|object| object.unit_price == cost }
   end
 
-  def find_all_by_price_in_range(range)
+  def find_all_by_price_in_range(range, prices = [])
     @items.find_all do |object|
       range.cover?(object.unit_price)
     end
@@ -65,7 +64,7 @@ class ItemRepo
   end
 
   def gets_sums_sqrt
-    summed = get_pre_sum_std_dev_array.sum
+    summed = get_pre_sum_std_dev_array.reduce(:+)
     divide_by = (get_pre_sum_std_dev_array.length) -1
     summed / divide_by
   end
@@ -81,35 +80,28 @@ class ItemRepo
     counts = Hash.new 0
     @items.each do |object|
       counts[object.merchant_id] += 1
-    
+
     end
     counts.values
   end
 
+  def merchants_with_high_item_count
+     counts = Hash.new 0
+     @items.each do |object|
+       counts[object.merchant_id] += 1
+     end
+     @sales_engine.get_high_achivers(counts)
+   end
 
-  def hash_for_merchants_with_highest_item_count
-    # merchants who have the most items for sale. Which merchants are more than one standard deviation above the average number of products offered?
-    # call std dev, mean/average
-    counts = Hash.new 0
-    @items.map {|item| counts[item.merchant_id] +=1
-
-    # returns an array of merchants
-  end
-
-  def enum_over_high_item_count_hash
-    high_achiving_merchants = []
-    mean = @sales_engine.average_items_per_merchant
-    count_hash = hash_for_merchants_with_highest_item_count
-    std_dev = average_items_per_merchant_standard_deviation
-    count_hash.each do |key, value|
-      if value >= std_dev + mean
-        high_achiving_merchants << key
+   def average_item_price_for_merchant(arr_of_items)
+     prices = []
+      arr_of_items.each do |item|
+        prices << item.unit_price
       end
-    high_achiving_merchants
-  end
+      sum_of_prices = prices.reduce(0) do |sum, price|
+        price+sum
+      end
+      (sum_of_prices / arr_of_items.length) / 100.to_f
+   end
 
 end
-
-def merchants_with_high_item_count
-
-  sales_engine.merchant(merchant_id)

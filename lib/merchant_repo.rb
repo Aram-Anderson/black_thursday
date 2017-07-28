@@ -1,8 +1,10 @@
-require_relative 'merchant'
+require './lib/merchant'
 require 'CSV'
+require 'simplecov'
+SimpleCov.start
+
 
 class MerchantRepo
-
 
   attr_reader :merchants
 
@@ -37,4 +39,26 @@ class MerchantRepo
   def item(merchant_id)
     @sales_engine.item(merchant_id)
   end
+
+  def get_high_achivers(count_hash)
+    high_achiving_merchants = []
+    mean = @sales_engine.average_items_per_merchant
+    std_dev = @sales_engine.average_items_per_merchant_standard_deviation
+    count_hash.each do |key, value|
+      if value >= std_dev + mean
+        high_achiving_merchants << key
+      end
+    end
+    iterate_over_achivers(high_achiving_merchants)
+  end
+
+  def iterate_over_achivers(high_achiving_merchants)
+    high_achiving_merchants.map do |merchant_id|
+      find_by_id(merchant_id)
+    end
+  end
+
+   
+
+
 end
