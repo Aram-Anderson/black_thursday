@@ -53,8 +53,7 @@ class SalesEngineTest < Minitest::Test
 
   def test_it_can_find_merchant_by_invoice_id
     invoice = @se.invoices.find_by_id(1985)
-    binding.pry
-    assert_equal Invoice, invoice.merchant.class
+    assert_equal 12336421, invoice.merchant.id
   end
 
 end

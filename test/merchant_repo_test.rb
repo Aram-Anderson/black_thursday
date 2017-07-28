@@ -25,7 +25,7 @@ class MerchantRepoTest < Minitest::Test
     refute @mr.merchants.empty?
   end
 
-  def test_it_can_add_all
+  def test_it_can_find_all
 
     assert_equal 475, @mr.all.count
   end

@@ -42,6 +42,6 @@ class MerchantRepo
   end
 
   def invoices(merchant_id)
-    @sales_engine.invoices(merchant_id)
+    @sales_engine.invoice(merchant_id)
   end
 end

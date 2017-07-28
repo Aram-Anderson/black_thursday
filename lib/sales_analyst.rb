@@ -18,4 +18,8 @@ class SalesAnalyst
   def merchants_with_highest_item_count
     @engine.merchants_with_highest_item_count
   end
+
+  def average_invoices_per_merchant
+    @engine.average_invoices_per_merchant
+  end
 end

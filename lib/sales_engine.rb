@@ -39,12 +39,16 @@ class SalesEngine
     @items.merchants_with_highest_item_count
   end
 
-  def invoices(merchant_id)
+  def invoice(merchant_id)
     @invoices.find_all_by_merchant_id(merchant_id)
   end
 
   def merchant(id)
     @merchants.find_by_id(id)
+  end
+
+  def average_invoices_per_merchant
+    ((@invoices.all.count).to_f / (@merchants.all.count).to_f).round(2)
   end
 
 end
