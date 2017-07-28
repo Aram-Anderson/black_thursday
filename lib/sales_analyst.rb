@@ -1,7 +1,7 @@
-require_relative 'sales_analyst_math'
+
 
 class SalesAnalyst
-  include SalesAnalystMath
+
 
   def initialize(engine)
     @engine = engine
@@ -16,6 +16,6 @@ class SalesAnalyst
   end
 
   def merchants_with_highest_item_count
-    @engine.merchants_with_highest_item_count 
+    @engine.merchants_with_highest_item_count
   end
 end

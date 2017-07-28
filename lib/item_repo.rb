@@ -81,17 +81,15 @@ class ItemRepo
     counts = Hash.new 0
     @items.each do |object|
       counts[object.merchant_id] += 1
-
     end
     counts.values
   end
-
 
   def hash_for_merchants_with_highest_item_count
     # merchants who have the most items for sale. Which merchants are more than one standard deviation above the average number of products offered?
     # call std dev, mean/average
     counts = Hash.new 0
-    @items.map {|item| counts[item.merchant_id] +=1
+    @items.map {|item| counts[item.merchant_id] +=1}
 
     # returns an array of merchants
   end
@@ -106,5 +104,7 @@ class ItemRepo
         high_achiving_merchants << key
       end
     high_achiving_merchants
+    binding.pry
   end
+end
 end

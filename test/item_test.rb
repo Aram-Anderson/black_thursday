@@ -7,7 +7,8 @@ require 'pry'
 class ItemTest < Minitest::Test
 
   def setup
-    @item = Item.new({:id => 44, :name => "Stuff 4 Sale", :description => "Junk", :unit_price => 7465, :merchant_id => 332, :created_at => Time.parse('2016-01-11 10:37:09 UTC'), :updated_at => Time.parse('1995-03-19 10:02:43 UTC')}, "merchant_id")
+    @item = Item.new({:id => 44,
+                      :name => "Stuff 4 Sale", :description => "Junk", :unit_price => 7465, :merchant_id => 332, :created_at => Time.parse('2016-01-11 10:37:09 UTC'), :updated_at => Time.parse('1995-03-19 10:02:43 UTC')}, "merchant_id")
   end
 
   def test_it_has_an_id
@@ -26,7 +27,7 @@ class ItemTest < Minitest::Test
 
   def test_it_has_a_unit_price
 
-    assert_equal BigDecimal, @item.unit_price.class
+    assert_equal 74.65, @item.unit_price.to_f
   end
 
   def test_it_has_a_merchant_id
