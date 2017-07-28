@@ -45,9 +45,9 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_status
-    assert_equal 1473, @ir.find_all_by_status("pending").count
+    assert_equal 1473, @ir.find_all_by_status(:pending).count
 
-    assert_equal [], @ir.find_all_by_status("platypus")
+    assert_equal [], @ir.find_all_by_status(:platypus)
   end
 
 end
