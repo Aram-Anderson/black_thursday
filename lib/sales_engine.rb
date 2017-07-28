@@ -51,4 +51,8 @@ class SalesEngine
     ((@invoices.all.count).to_f / (@merchants.all.count).to_f).round(2)
   end
 
+  def average_invoices_per_merchant_standard_deviation
+    @invoices.average_invoices_per_merchant_standard_deviation
+  end
+
 end
