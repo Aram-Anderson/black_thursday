@@ -64,9 +64,6 @@ class ItemRepoTest < Minitest::Test
   end
 
 
-  def test_return_of_merch_with_high_item_count
-    skip
-    assert_equal ({}), @ir.merchants_with_high_item_count
-  end
+  
 
 end

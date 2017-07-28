@@ -47,4 +47,9 @@ class SalesEngine
   @items.average_item_price_for_merchant(arr_of_items)
   end
 
+  def average_average_price_per_merchant
+    @merchants.average_average_price_per_merchant
+  end
+
+
 end

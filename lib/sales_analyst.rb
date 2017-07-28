@@ -20,5 +20,8 @@ def average_item_price_for_merchant(merchant_id)
   @engine.average_item_price_for_merchant(merchant_id)
 end
 
+def average_average_price_per_merchant
+  @engine.average_average_price_per_merchant
+end
 
 end

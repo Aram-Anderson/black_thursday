@@ -58,7 +58,16 @@ class MerchantRepo
     end
   end
 
-   
 
+  def average_average_price_per_merchant
+    merch_item_averages = []
+    @merchants.each do |merchant|
+      merch_item_averages << @sales_engine.average_item_price_for_merchant(merchant.id)
+    end
+    get_average =  merch_item_averages.reduce(0) do |sum, item_average|
+        sum+item_average
+      end
+      get_average/merchants.count.to_f
+  end
 
 end

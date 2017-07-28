@@ -34,7 +34,17 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_it_can_find_average_price_per_merchant
-    assert_equal 16.66, @sa.average_item_price_for_merchant(12334105)
+    assert_equal 16.65, @sa.average_item_price_for_merchant(12334105)
+
+  assert_equal 76.66, @sa.average_item_price_for_merchant(12334155)
+
+  assert_equal 50.00, @sa.average_item_price_for_merchant( 12335403)
   end
+
+  def test_average_average_price_per_merchant
+    assert_equal 350.29, @sa.average_average_price_per_merchant
+  end
+
+
 
 end
