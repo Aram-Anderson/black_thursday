@@ -1,9 +1,8 @@
-
 require './test/test_helper.rb'
 
-task :unit_test do |t|
-  puts "Running all tests!"
-  ruby 'test/test_helper.rb'
+
+puts "Running all tests!"
+task :unit_test do ruby 'test/test_helper.rb'
 end
 
 task :default => :unit_test

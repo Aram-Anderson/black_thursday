@@ -10,7 +10,8 @@ class ItemRepoTest < Minitest::Test
   def setup
     @se = SalesEngine.from_csv({
     :items     => "./data/items.csv",
-    :merchants => "./data/merchants.csv"})
+    :merchants => "./data/merchants.csv",
+    :invoices  => "./data/invoices.csv"})
 
     @ir = @se.items
   end
@@ -58,11 +59,11 @@ class ItemRepoTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_price
-    assert_equal 40, @ir.find_all_by_price(12.00).count
+    assert_equal 41, @ir.find_all_by_price(12.00).count
   end
 
   def test_it_can_find_all_in_price_range
-    assert_equal 354, @ir.find_all_by_price_in_range(12.00..25.00).count
+    assert_equal 356, @ir.find_all_by_price_in_range(12.00..25.00).count
   end
 
   def test_it_can_find_all_by_merchant_id
