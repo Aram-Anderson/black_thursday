@@ -28,6 +28,7 @@ class ItemTest < Minitest::Test
   def test_it_has_a_unit_price
 
     assert_equal 74.65, @item.unit_price.to_f
+
   end
 
   def test_it_has_a_merchant_id
@@ -37,16 +38,15 @@ class ItemTest < Minitest::Test
 
   def test_it_has_a_created_at
 
-    assert_equal Time, @item.created_at.class
+    assert_equal 54, @item.created_at
   end
 
   def test_it_has_an_updated_at
 
-    assert_equal Time, @item.updated_at.class
+    assert_equal 75, @item.updated_at
   end
 
   def test_it_can_convert_unit_price_to_dollars
-
-    assert_equal 74.65, @item.unit_price_to_dollars(7465.to_f)
+    assert_equal 74.65, @item.unit_price_to_dollars
   end
 end
