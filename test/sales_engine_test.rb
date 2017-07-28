@@ -1,7 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/sales_engine'
+require_relative '../lib/sales_engine'
 require 'pry'
 
 

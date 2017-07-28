@@ -1,4 +1,4 @@
-require './lib/merchant'
+require_relative '../lib/merchant'
 require 'CSV'
 require 'simplecov'
 SimpleCov.start
@@ -71,6 +71,7 @@ class MerchantRepo
   end
 
   def average_price_per_item_per_merchant_standard_deviation
+
     Math.sqrt(std_dev_helper_3).round(2)
   end
 
@@ -78,21 +79,21 @@ class MerchantRepo
   summed = std_dev_helper_2.reduce(:+)
   divide_by = (std_dev_helper_2.length)-1
   summed / divide_by
+
 end
 
   def std_dev_helper_2
     merch_item_averages = std_dev_helper_1
-    mean = average_average_price_per_merchant
+    mean = average_average_price_per_merchant.round(2)
     merch_item_averages.map do |integer|
     (integer - mean) ** 2
     end
   end
 
   def std_dev_helper_1
-    mean = average_average_price_per_merchant
   merch_item_averages = []
   @merchants.each do |merchant|
-    merch_item_averages << @sales_engine.average_item_price_for_merchant(merchant.id)
+  merch_item_averages = merch_item_averages << @sales_engine.average_item_price_for_merchant(merchant.id)
   end
   merch_item_averages
 end

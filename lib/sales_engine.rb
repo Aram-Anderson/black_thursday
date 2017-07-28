@@ -1,5 +1,5 @@
-require './lib/item_repo'
-require './lib/merchant_repo'
+require_relative '../lib/item_repo'
+require_relative '../lib/merchant_repo'
 require 'pry'
 require 'simplecov'
 SimpleCov.start

@@ -1,5 +1,5 @@
 require 'CSV'
-require './lib/item'
+require_relative '../lib/item'
 require 'simplecov'
 require 'pry'
 SimpleCov.start
@@ -106,8 +106,9 @@ class ItemRepo
 
    def golden_items(std_dev)
      golden_items = []
+     mean = @sales_engine.average_average_price_per_merchant
      @items.each do |item|
-       if item.unit_price >= (std_dev*2)
+       if item.unit_price >= (std_dev*2 + mean)
          golden_items << item
        end
      end
