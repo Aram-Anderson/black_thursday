@@ -51,5 +51,9 @@ class SalesEngine
     @merchants.average_average_price_per_merchant
   end
 
+  def golden_items
+  std_dev =   @merchants.average_price_per_item_per_merchant_standard_deviation
+  @items.golden_items(std_dev)
+  end
 
 end

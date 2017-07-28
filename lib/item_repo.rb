@@ -104,4 +104,14 @@ class ItemRepo
       (sum_of_prices / arr_of_items.length) / 100.to_f
    end
 
+   def golden_items(std_dev)
+     golden_items = []
+     @items.each do |item|
+       if item.unit_price >= (std_dev*2)
+         golden_items << item
+       end
+     end
+     golden_items
+   end
+
 end
