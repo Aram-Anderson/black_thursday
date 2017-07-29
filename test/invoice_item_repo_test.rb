@@ -38,7 +38,8 @@ class InvoiceItemRepoTest < Minitest::Test
   def test_it_can_find_all_by_invoice_id
     assert_equal 8, @ir.find_all_by_invoice_id(8).count
     assert_equal [], @ir.find_all_by_invoice_id(5000)
-
   end
+
+
 
 end
