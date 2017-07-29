@@ -34,4 +34,5 @@ class InvoiceItemRepo
     @invoice_items.find_all {|item| item.invoice_id == invoice_id}
   end
 
+
 end
