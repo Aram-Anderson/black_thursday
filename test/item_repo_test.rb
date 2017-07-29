@@ -17,8 +17,6 @@ class ItemRepoTest < Minitest::Test
   end
 
   def test_it_exists
-
-
     assert_instance_of ItemRepo, @se.items
   end
 
@@ -27,7 +25,6 @@ class ItemRepoTest < Minitest::Test
   end
 
   def test_it_can_add_all
-
     assert_equal 1367, @ir.all.count
   end
 
@@ -58,13 +55,16 @@ class ItemRepoTest < Minitest::Test
     assert_equal 1, @ir.find_all_with_description(input).count
   end
 
-
-
   def test_it_can_find_all_by_merchant_id
+
     assert_equal 6, @ir.find_all_by_merchant_id(12334185).count
   end
 
+  def test_it_can_find_all_by_price
+    assert_equal 3, @ir.find_all_by_price(29.99).count
+  end
 
-
-
+  def test_it_can_find_all_in_price_range
+    assert_equal 201, @ir.find_all_by_price_in_range(12.99..20.99).count
+  end
 end

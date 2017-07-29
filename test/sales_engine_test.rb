@@ -14,17 +14,14 @@ class SalesEngineTest < Minitest::Test
     :invoices  => "./data/invoices.csv"})
   end
 
-  def test_sales_engine_init_from_spec
-
-  assert_instance_of MerchantRepo, @se.merchants
-  assert_instance_of ItemRepo, @se.items
-
+  def test_it_exists
+    assert_instance_of SalesEngine, @se
   end
 
-  def test_it_exists
+  def test_sales_engine_init_from_spec
 
-    assert_instance_of SalesEngine, @se
-
+    assert_instance_of MerchantRepo, @se.merchants
+    assert_instance_of ItemRepo, @se.items
   end
 
   def test_it_initializes_with_an_instance_of_item_repo
@@ -41,6 +38,10 @@ class SalesEngineTest < Minitest::Test
     merchant = @se.merchants.find_by_id(12334195)
 
     assert_equal 20, merchant.items.count
+  end
+
+  def test_it_can_find_merchants_by_id
+    assert_equal "BowlsByChris", @se.merchant(12334145).name
   end
 
   def test_it_can_find_merchants_from_instance_of_item

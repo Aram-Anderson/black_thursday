@@ -45,9 +45,4 @@ class MerchantRepoTest < Minitest::Test
     assert_equal 5, @mr.find_all_by_name("Gran").count
   end
 
-
-  def test_std_dev_for_avg_price_per_merchant
-    assert_equal 4.35, @mr.average_price_per_item_per_merchant_standard_deviation
-  end
-
 end
