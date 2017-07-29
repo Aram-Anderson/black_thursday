@@ -101,7 +101,7 @@ class ItemRepo
     high_achiving_merchants
   end
 end
-end
+
 
 def merchants_with_high_item_count
    counts = Hash.new 0
@@ -119,7 +119,7 @@ def average_item_price_for_merchant(arr_of_items)
     sum_of_prices = prices.reduce(0) do |sum, price|
       price+sum
   end
-  (sum_of_prices / arr_of_items.length) / 100.to_f
+  (sum_of_prices.to_f / arr_of_items.length.to_f) / 100.to_f
 end
 
    def golden_items(std_dev)
@@ -131,5 +131,5 @@ end
        end
         golden_items
      end
-
    end
+end
