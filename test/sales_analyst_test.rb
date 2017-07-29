@@ -58,7 +58,6 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_golden_items
-    skip
     assert_equal 5, @sa.golden_items.count
   end
 
