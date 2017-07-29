@@ -50,4 +50,8 @@ class SalesAnalyst
     @engine.top_days_by_invoice_count
   end
 
+  def invoice_status(symbol)
+    @engine.invoice_status(symbol)
+  end
+
 end

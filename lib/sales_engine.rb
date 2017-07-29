@@ -92,4 +92,8 @@ class SalesEngine
     @invoices.top_days_by_invoice_count
   end
 
+  def invoice_status(symbol)
+    @invoices.invoice_status(symbol)
+  end
+
 end

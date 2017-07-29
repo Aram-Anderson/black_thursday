@@ -58,6 +58,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_golden_items
+    skip
     assert_equal 5, @sa.golden_items.count
   end
 
@@ -71,5 +72,9 @@ class SalesAnalystTest < Minitest::Test
 
   def test_it_can_find_top_days_by_invoice_count
     assert_equal ["Wednesday"], @sa.top_days_by_invoice_count
+  end
+
+  def test_it_can_return_percentage_of_invoices_by_status
+    assert_equal 29.55, @sa.invoice_status(:pending)
   end
 end

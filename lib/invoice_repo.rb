@@ -129,4 +129,12 @@ class InvoiceRepo
     what_day_is_it?(dates)
   end
 
+  def invoice_status(symbol)
+    total = @invoices.count
+    count = Hash.new 0
+    @invoices.each do |invoice|
+      count[invoice.status] += 1
+    end
+    ((count[symbol].to_f / total) * 100).round(2)
+  end
 end
