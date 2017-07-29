@@ -61,4 +61,15 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 5, @sa.golden_items.count
   end
 
+  def test_it_can_find_top_performing_merchants_from_invoice_count
+    assert_equal 12, @sa.top_merchants_by_invoice_count.count
+  end
+
+  def test_it_can_find_bottom_performing_merchants_by_invoice
+    assert_equal 4, @sa.bottom_merchants_by_invoice_count.count
+  end
+
+  def test_it_can_find_top_days_by_invoice_count
+    assert_equal ["Wednesday"], @sa.top_days_by_invoice_count
+  end
 end

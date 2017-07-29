@@ -62,31 +62,9 @@ class MerchantRepo
     end
   end
 
-#   def average_price_per_item_per_merchant_standard_deviation
-#     Math.sqrt(std_dev_helper_3).round(2)
-#   end
-#
-#   def std_dev_helper_3
-#     summed = std_dev_helper_2.reduce(:+)
-#     divide_by = (std_dev_helper_2.length) - 1
-#     summed / divide_by
-#   end
-#
-#   def std_dev_helper_2
-#     merch_item_averages = std_dev_helper_1
-#     mean = @sales_engine.average_average_price_per_merchant
-#     merch_item_averages.map do |integer|
-#     (integer - mean) ** 2
-#     end
-#   end
-#
-#   def std_dev_helper_1
-#   merch_item_averages = []
-#   @merchants.each do |merchant|
-#   merch_item_averages <<
-#@sales_engine.average_item_price_for_merchant(merchant.id)
-#   end
-#   merch_item_averages
-# end
-
+  def find_invoice_merchants(ids)
+    ids.map do |id|
+      find_by_id(id)
+    end
+  end
 end

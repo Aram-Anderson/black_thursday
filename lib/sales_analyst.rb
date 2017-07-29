@@ -38,4 +38,16 @@ class SalesAnalyst
     @engine.golden_items
   end
 
+  def top_merchants_by_invoice_count
+    @engine.top_merchants_by_invoice_count
+  end
+
+  def bottom_merchants_by_invoice_count
+    @engine.bottom_merchants_by_invoice_count
+  end
+
+  def top_days_by_invoice_count
+    @engine.top_days_by_invoice_count
+  end
+
 end

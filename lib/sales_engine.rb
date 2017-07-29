@@ -76,4 +76,20 @@ class SalesEngine
     @invoices.average_invoices_per_merchant_standard_deviation
   end
 
+  def top_merchants_by_invoice_count
+    @invoices.top_merchants_by_invoice_count
+  end
+
+  def bottom_merchants_by_invoice_count
+    @invoices.bottom_merchants_by_invoice_count
+  end
+
+  def find_invoice_merchants(ids)
+    @merchants.find_invoice_merchants(ids)
+  end
+
+  def top_days_by_invoice_count
+    @invoices.top_days_by_invoice_count
+  end
+
 end

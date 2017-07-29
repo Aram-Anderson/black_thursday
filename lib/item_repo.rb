@@ -1,9 +1,12 @@
 require 'CSV'
 require_relative 'item'
+require_relative 'std_dev_math'
 require 'pry'
 
 
 class ItemRepo
+
+  include StdDevMath
 
   attr_reader :items,
               :sales_engine
@@ -63,28 +66,11 @@ class ItemRepo
   end
 
   def average_items_per_merchant_standard_deviation
-    Math.sqrt(gets_sums_sqrt).round(2)
-  end
-
-  def gets_sums_sqrt
-    summed = get_pre_sum_std_dev_array.reduce(:+)
-    divide_by = (get_pre_sum_std_dev_array.length) - 1
-    summed / divide_by
-  end
-
-  def get_pre_sum_std_dev_array
-    mean = @sales_engine.average_items_per_merchant
-    pre_sum_std_dev_array = gets_first_array.map do |integer|
-      (integer - mean) ** 2
-    end
-  end
-
-  def gets_first_array
     counts = Hash.new 0
     @items.each do |object|
       counts[object.merchant_id] += 1
     end
-    counts.values
+    standard_deviation(counts)
   end
 
   def average_item_price_for_merchant(merchant_id)

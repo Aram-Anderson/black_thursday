@@ -1,6 +1,11 @@
+require 'time'
+require_relative 'day_of_week'
 require_relative 'invoice'
+require_relative 'std_dev_math'
 
 class InvoiceRepo
+  include StdDevMath
+  include DayOfWeek
 
   attr_reader :invoices
 
@@ -49,28 +54,79 @@ class InvoiceRepo
     @sales_engine.merchant(merchant_id)
   end
 
+  def average_invoices_per_merchant
+    @sales_engine.average_invoices_per_merchant
+  end
+
   def average_invoices_per_merchant_standard_deviation
-    Math.sqrt(gets_sums_sqrt).round(2)
-  end
-
-  def gets_sums_sqrt
-    summed = get_pre_sum_std_dev_array.inject(:+)
-    divide_by = (get_pre_sum_std_dev_array.length) -1
-    summed / divide_by
-  end
-
-  def get_pre_sum_std_dev_array
-    mean = @sales_engine.average_invoices_per_merchant
-    pre_sum_std_dev_array = gets_first_array.map do |integer|
-      (integer - mean) ** 2
-    end
-  end
-
-  def gets_first_array
     counts = Hash.new 0
     @invoices.each do |object|
       counts[object.merchant_id] += 1
     end
-    counts.values
+    standard_deviation(counts)
   end
+
+  def top_merchants_by_invoice_count
+    count = Hash.new 0
+    @invoices.each do |invoice|
+      count[invoice.merchant_id] += 1
+    end
+    parse_out_high_performers(count)
+  end
+
+  def parse_out_high_performers(count)
+    mean = average_invoices_per_merchant
+    std_dev = standard_deviation(count)
+    to_beat = (std_dev * 2) + mean
+    ids = []
+      count.each do |key, value|
+        if value >= to_beat
+          ids << key
+        end
+      end
+    @sales_engine.find_invoice_merchants(ids)
+  end
+
+  def bottom_merchants_by_invoice_count
+    count = Hash.new 0
+    @invoices.each do |invoice|
+      count[invoice.merchant_id] += 1
+    end
+    parse_out_low_performers(count)
+  end
+
+  def parse_out_low_performers(count)
+    mean = average_invoices_per_merchant
+    std_dev = standard_deviation(count)
+    to_beat = mean - (std_dev * 2)
+    ids = []
+      count.each do |key, value|
+        if value <= to_beat
+          ids << key
+        end
+      end
+    @sales_engine.find_invoice_merchants(ids)
+  end
+
+  def top_days_by_invoice_count
+    count = Hash.new 0
+    @invoices.each do |invoice|
+      count[invoice.created_at.wday] += 1
+    end
+    parse_out_dates(count)
+  end
+
+  def parse_out_dates(count)
+    mean = count.values.inject(:+) / count.length
+    std_dev = standard_deviation(count)
+    to_beat = std_dev + mean
+    dates = []
+      count.each do |key, value|
+        if value > to_beat
+          dates << key
+        end
+      end
+    what_day_is_it?(dates)
+  end
+
 end
