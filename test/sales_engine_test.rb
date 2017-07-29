@@ -1,7 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/sales_engine'
+require_relative '../lib/sales_engine'
 require 'pry'
 
 
@@ -29,7 +29,6 @@ class SalesEngineTest < Minitest::Test
 
   def test_it_initializes_with_an_instance_of_item_repo
 
-
     assert_instance_of ItemRepo, @se.items
   end
 
@@ -38,22 +37,28 @@ class SalesEngineTest < Minitest::Test
     assert_instance_of MerchantRepo, @se.merchants
   end
 
+  def test_it_can_find_items_from_instance_of_merchant
+    merchant = @se.merchants.find_by_id(12334195)
+
+    assert_equal 20, merchant.items.count
+  end
+
   def test_it_can_find_merchants_from_instance_of_item
 
-    item = @se.items.find_by_id(263395617)
+    item = @se.items.find_all_by_merchant_id(12334195).first
 
-    assert_equal "Madewithgitterxx", item.merchant.name
+    assert_equal "FlavienCouche", item.merchant.name
   end
 
   def test_it_can_find_all_invoices_by_merchant_id
-    merchant = @se.merchants.find_by_id(12334688)
+    merchant = @se.merchants.find_by_id(12336161)
 
-    assert_equal 10, merchant.invoices.count
+    assert_equal 9, merchant.invoices.count
   end
 
   def test_it_can_find_merchant_by_invoice_id
-    invoice = @se.invoices.find_by_id(1985)
-    assert_equal 12336421, invoice.merchant.id
+    invoice = @se.invoices.find_by_id(30)
+    assert_equal 12334208, invoice.merchant.id
   end
 
 end

@@ -1,8 +1,8 @@
 require 'minitest'
 require 'minitest/autorun'
-require './lib/merchant'
-require './lib/sales_engine'
-require './lib/merchant_repo'
+require_relative '../lib/merchant'
+require_relative '../lib/sales_engine'
+require_relative '../lib/merchant_repo'
 require 'pry'
 
 
@@ -29,4 +29,5 @@ class MerchantTest < Minitest::Test
   def test_it_has_an_updated_at
     assert_equal 7, @merchant.updated_at
   end
+
 end

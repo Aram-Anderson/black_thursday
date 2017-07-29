@@ -3,7 +3,6 @@ require 'CSV'
 
 class MerchantRepo
 
-
   attr_reader :merchants
 
   def initialize(file, sales_engine)
@@ -44,4 +43,50 @@ class MerchantRepo
   def invoices(merchant_id)
     @sales_engine.invoice(merchant_id)
   end
+
+  def get_high_achivers(count_hash)
+    high_achiving_merchants = []
+    mean = @sales_engine.average_items_per_merchant
+    std_dev = @sales_engine.average_items_per_merchant_standard_deviation
+    count_hash.each do |key, value|
+      if value >= std_dev + mean
+        high_achiving_merchants << key
+      end
+    end
+    iterate_over_achivers(high_achiving_merchants)
+  end
+
+  def iterate_over_achivers(high_achiving_merchants)
+    high_achiving_merchants.map do |merchant_id|
+      find_by_id(merchant_id)
+    end
+  end
+
+#   def average_price_per_item_per_merchant_standard_deviation
+#     Math.sqrt(std_dev_helper_3).round(2)
+#   end
+#
+#   def std_dev_helper_3
+#     summed = std_dev_helper_2.reduce(:+)
+#     divide_by = (std_dev_helper_2.length) - 1
+#     summed / divide_by
+#   end
+#
+#   def std_dev_helper_2
+#     merch_item_averages = std_dev_helper_1
+#     mean = @sales_engine.average_average_price_per_merchant
+#     merch_item_averages.map do |integer|
+#     (integer - mean) ** 2
+#     end
+#   end
+#
+#   def std_dev_helper_1
+#   merch_item_averages = []
+#   @merchants.each do |merchant|
+#   merch_item_averages <<
+#@sales_engine.average_item_price_for_merchant(merchant.id)
+#   end
+#   merch_item_averages
+# end
+
 end

@@ -1,6 +1,5 @@
 require 'time'
 require 'bigdecimal'
-
 class Item
 
   attr_reader :id,
@@ -18,8 +17,8 @@ class Item
     @price        = BigDecimal.new(data[:unit_price])
     @unit_price   = unit_price_to_dollars(@price)
     @merchant_id  = data[:merchant_id]
-    @created_at   = Time.parse(data[:created_at].to_s)
-    @updated_at   = Time.parse(data[:updated_at].to_s)
+    @created_at   = Time.parse(data[:created_at])
+    @updated_at   = Time.parse(data[:updated_at])
     @item_repo    = item_repo
   end
 

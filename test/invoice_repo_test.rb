@@ -27,7 +27,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_can_find_by_id
-    assert_equal 12334703, @ir.find_by_id(627).merchant_id
+    assert_equal 12336163, @ir.find_by_id(35).merchant_id
 
     assert_nil @ir.find_by_id(9000)
   end

@@ -58,15 +58,13 @@ class ItemRepoTest < Minitest::Test
     assert_equal 1, @ir.find_all_with_description(input).count
   end
 
-  def test_it_can_find_all_by_price
-    assert_equal 41, @ir.find_all_by_price(12.00).count
-  end
 
-  def test_it_can_find_all_in_price_range
-    assert_equal 356, @ir.find_all_by_price_in_range(12.00..25.00).count
-  end
 
   def test_it_can_find_all_by_merchant_id
     assert_equal 6, @ir.find_all_by_merchant_id(12334185).count
   end
+
+
+
+
 end

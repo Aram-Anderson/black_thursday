@@ -15,7 +15,7 @@ class Merchant
   end
 
   def items
-    @merchant_repo.item(merchant_id)
+    @merchant_repo.item(id)
   end
 
   def invoices

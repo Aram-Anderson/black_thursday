@@ -2,37 +2,51 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/emoji'
 require './lib/item'
+require './lib/sales_engine'
 require 'pry'
 
 class ItemTest < Minitest::Test
 
   def setup
-    @item = Item.new({:id => 44,
-                      :name => "Stuff 4 Sale", :description => "Junk", :unit_price => 7465, :merchant_id => 332, :created_at => Time.parse('2016-01-11 10:37:09 UTC'), :updated_at => Time.parse('1995-03-19 10:02:43 UTC')}, "merchant_id")
+    @se = SalesEngine.from_csv({
+    :items     => "./data/items.csv",
+    :merchants => "./data/merchants.csv",
+    :invoices  => "./data/invoices.csv"})
+
+    @item = @se.items.find_by_id(263395617)
   end
 
   def test_it_has_an_id
 
-    assert_equal 44, @item.id
+    assert_equal 263395617, @item.id
   end
 
   def test_it_has_a_name
 
-    assert_equal "Stuff 4 Sale", @item.name
+    assert_equal "Glitter scrabble frames", @item.name
   end
 
   def test_it_has_a_description
-    assert_equal "Junk", @item.description
+    assert_equal "Glitter scrabble frames \n" +
+    "\n" +
+    "Any colour glitter \n" +
+    "Any wording\n" +
+    "\n" +
+    "Available colour scrabble tiles\n" +
+    "Pink\n" +
+    "Blue\n" +
+    "Black\n" +
+    "Wooden", @item.description
   end
 
   def test_it_has_a_unit_price
 
-    assert_equal 74.65, @item.unit_price.to_f
+    assert_equal 13.00, @item.unit_price.to_f
   end
 
   def test_it_has_a_merchant_id
 
-    assert_equal 332, @item.merchant_id
+    assert_equal 12334185, @item.merchant_id
   end
 
   def test_it_has_a_created_at
