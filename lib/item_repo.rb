@@ -128,10 +128,9 @@ def merchants_with_high_item_count
 end
 
   def golden_items
-    golden_items = []
-    mean = get_mean
+    compare = std_dev * 2 + get_mean
     @items.find_all do |item|
-      item.unit_price > (std_dev * 2) + mean
+      item.unit_price > compare
     end
   end
 
