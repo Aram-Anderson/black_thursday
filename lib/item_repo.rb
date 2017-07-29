@@ -100,32 +100,13 @@ class ItemRepo
     BigDecimal.new((prices.compact.inject(:+) / prices.length).round(2), 5)
   end
 
-
-  def hash_for_merchants_with_highest_item_count
-    counts = Hash.new 0
-    @items.map {|item| counts[item.merchant_id] +=1}
-  end
-
-  def enum_over_high_item_count_hash
-    high_achiving_merchants = []
-    mean = @sales_engine.average_items_per_merchant
-    count_hash = hash_for_merchants_with_highest_item_count
-    std_dev = average_items_per_merchant_standard_deviation
-    count_hash.each do |key, value|
-      if value >= std_dev + mean
-        high_achiving_merchants << key
+  def merchants_with_high_item_count
+     counts = Hash.new 0
+      @items.each do |object|
+       counts[object.merchant_id] += 1
       end
-    high_achiving_merchants
+     @sales_engine.get_high_achivers(counts)
   end
-end
-
-def merchants_with_high_item_count
-   counts = Hash.new 0
-    @items.each do |object|
-     counts[object.merchant_id] += 1
-    end
-   @sales_engine.get_high_achivers(counts)
-end
 
   def golden_items
     compare = std_dev * 2 + get_mean

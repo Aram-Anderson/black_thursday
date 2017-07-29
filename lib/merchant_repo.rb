@@ -46,14 +46,19 @@ class MerchantRepo
 
   def get_high_achivers(count_hash)
     high_achiving_merchants = []
-    mean = @sales_engine.average_items_per_merchant
-    std_dev = @sales_engine.average_items_per_merchant_standard_deviation
+    compare = get_compare
     count_hash.each do |key, value|
-      if value >= std_dev + mean
+      if value >= compare
         high_achiving_merchants << key
       end
     end
     iterate_over_achivers(high_achiving_merchants)
+  end
+
+  def get_compare
+    mean = @sales_engine.average_items_per_merchant
+    std_dev = @sales_engine.average_items_per_merchant_standard_deviation
+    mean + std_dev
   end
 
   def iterate_over_achivers(high_achiving_merchants)

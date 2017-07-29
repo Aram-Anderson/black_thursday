@@ -64,10 +64,6 @@ class SalesEngine
     @invoices.find_all_by_merchant_id(merchant_id)
   end
 
-  def merchant(id)
-    @merchants.find_by_id(id)
-  end
-
   def average_invoices_per_merchant
     ((@invoices.all.count).to_f / (@merchants.all.count).to_f).round(2)
   end
