@@ -122,8 +122,8 @@ class SalesEngine
     @invoices.find_by_id(invoice_id)
   end
 
-  def find_all_customers_for_merchant(id)
-    @invoices.find_all_customers_for_merchant(id)
+  def find_all_customers_for_merchant(merchant_id)
+    @invoices.find_all_customers_for_merchant(merchant_id)
   end
 
   def find_multiple_customers(customer_ids)
@@ -138,4 +138,37 @@ class SalesEngine
    @merchants.find_multiple_merchants(merchant_ids)
  end
 
-end
+  def is_it_paid_in_full?(invoice_id)
+    trans = get_transactions(invoice_id)
+    trans.any? do |tran|
+      tran.result == "success"
+    end
+  end
+
+  def get_transactions(invoice_id)
+   @transactions.find_all_by_invoice_id(invoice_id)
+  end
+
+  def get_total_for_invoice(invoice_id)
+    i_items = get_invoice_items(invoice_id)
+    i_items.map do |i_item|
+      i_item.unit_price * i_item.quantity
+    end.inject(:+)
+  end
+
+  def get_invoice_items(invoice_id)
+    all_invoice_items = @invoice_items.find_all_by_invoice_id(invoice_id)
+    remove_unpaid_invoice_items(all_invoice_items)
+  end
+
+  def remove_unpaid_invoice_items(all_invoice_items)
+    paid_i_items = []
+    all_invoice_items.each do |i_item|
+      if is_it_paid_in_full?(i_item.invoice_id)
+        paid_i_items << i_item
+      end
+    end
+    paid_i_items
+  end
+
+  end

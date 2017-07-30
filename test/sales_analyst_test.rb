@@ -8,9 +8,13 @@ class SalesAnalystTest < Minitest::Test
 
   def setup
     @se = SalesEngine.from_csv({
-    :items     => "./data/items.csv",
+    :items => "./data/items.csv",
     :merchants => "./data/merchants.csv",
-    :invoices  => "./data/invoices.csv"})
+    :invoices => "./data/invoices.csv",
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"
+    })
 
     @sa = SalesAnalyst.new(@se)
   end
@@ -75,5 +79,9 @@ class SalesAnalystTest < Minitest::Test
 
   def test_it_can_return_percentage_of_invoices_by_status
     assert_equal 29.55, @sa.invoice_status(:pending)
+  end
+
+  def test_it_can_find_total_revenue_by_date
+    assert_equal 57455685.56, @sa.total_revenue_by_date("2012-03-27")
   end
 end

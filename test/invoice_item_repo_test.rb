@@ -6,18 +6,15 @@ require './lib/invoice_item_repo'
 class InvoiceItemRepoTest < Minitest::Test
 
   def setup
-    @ir = InvoiceItemRepo.new
-    @ir.from_csv("./data/fixture_for_invoice_items.csv")
+    @ir = InvoiceItemRepo.new("./data/fixture_for_invoice_items.csv", "something")
   end
 
   def test_it_exists
-    assert_instance_of InvoiceItemRepo, InvoiceItemRepo.new
+    assert_instance_of InvoiceItemRepo, InvoiceItemRepo.new("./data/fixture_for_invoice_items.csv", "something")
   end
 
   def test_it_can_load_from_csv
-    ir = InvoiceItemRepo.new
-    assert ir.invoice_items.empty?
-    ir.from_csv("./data/fixture_for_invoice_items.csv")
+    ir = InvoiceItemRepo.new("./data/fixture_for_invoice_items.csv", "something")
     refute ir.invoice_items.empty?
   end
 

@@ -7,8 +7,7 @@ require 'pry'
 class TransactionRepoTest < Minitest::Test
 
   def setup
-    @tr = TransactionRepo.new
-    @tr.from_csv("./data/fixture_transactions.csv")
+    @tr = TransactionRepo.new("./data/fixture_transactions.csv")
   end
 
   def test_it_exists

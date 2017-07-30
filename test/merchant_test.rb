@@ -39,9 +39,10 @@ class MerchantTest < Minitest::Test
     :transactions => "./data/transactions.csv",
     :customers => "./data/customers.csv"
     })
-    merchant = se.merchants.find_by_id(12335938)
+    merchant = se.merchants.find_by_id(12334194)
 
-    assert_equal 16, merchant.customers.count
+    assert_equal 12, merchant.customers.count
+    assert_equal Customer, merchant.customers[0].class
   end
 
 end

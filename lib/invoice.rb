@@ -33,7 +33,11 @@ class Invoice
   end
 
   def is_paid_in_full?
-    @status == true
+    @invoice_repo.is_it_paid_in_full?(id)
+  end
+
+  def total
+    @invoice_repo.get_total_for_invoice(id)
   end
 
 end
