@@ -33,8 +33,7 @@ class Invoice
   end
 
   def is_paid_in_full?
-    #invoice_id passed to transactions? 
-
+    @status == true
   end
 
 end

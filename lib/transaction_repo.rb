@@ -15,9 +15,7 @@ class TransactionRepo
   def from_csv(file)
     CSV.foreach(file, :headers => true,
                       :header_converters =>
-                      :symbol,
-                      :converters =>
-                      :all) do |row|
+                      :symbol) do |row|
     @transactions << Transaction.new(row, self)
     end
   end
