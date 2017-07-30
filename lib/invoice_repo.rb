@@ -45,7 +45,8 @@ class InvoiceRepo
         customer_ids << invoice.customer_id
       end
     end
-      @sales_engine.find_multiple_customers(customer_ids)
+    customer_ids.uniq!
+    @sales_engine.find_multiple_customers(customer_ids)
   end
 
   def find_all_merchants_for_customer(customer_id)
@@ -55,7 +56,7 @@ class InvoiceRepo
         merchant_ids << invoice.merchant_id
       end
     end
-    @sales_engine.find_multiple_merchants(merchant_ids) 
+    @sales_engine.find_multiple_merchants(merchant_ids)
   end
 
   def find_all_by_merchant_id(id)

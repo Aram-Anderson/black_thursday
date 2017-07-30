@@ -31,7 +31,7 @@ class MerchantRepo
   def find_multiple_merchants(merchant_ids)
     merchant_ids.map do |merchant_id|
       find_by_id(merchant_id)
-    end 
+    end
   end
 
   def find_by_name(name)
@@ -79,8 +79,8 @@ class MerchantRepo
     end
   end
 
-  def find_all_customers_for_merchant(id)
-    @sales_engine.find_all_customers_for_merchant(id)
+  def find_all_customers_for_merchant(merchant_id)
+    @sales_engine.find_all_customers_for_merchant(merchant_id)
   end
 
 
