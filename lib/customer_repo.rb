@@ -17,7 +17,7 @@ class CustomerRepo
                       :symbol,
                       :converters =>
                       :all) do |row|
-    @customers <<  Customer.new(row)
+    @customers <<  Customer.new(row, self)
     end
   end
 
@@ -45,6 +45,10 @@ class CustomerRepo
     @customers.find_all do |customer|
       customer.last_name.include? name
     end
+  end
+
+  def find_all_merchants_for_customer(customer_id)
+    @sales_engine.find_all_merchants_for_customer(customer_id)
   end
 
 end

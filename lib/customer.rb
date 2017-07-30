@@ -8,12 +8,17 @@ class Customer
               :created_at,
               :updated_at
 
-  def initialize(data)
+  def initialize(data, customer_repo)
     @id           = data[:id]
     @first_name   = data[:first_name]
     @last_name    = data[:last_name]
     @created_at   = Time.parse(data[:created_at])
     @updated_at   = Time.parse(data[:updated_at])
+    @customer_repo = customer_repo
+  end
+
+  def merchants
+    @customer_repo.find_all_merchants_for_customer(id)
   end
 
 end

@@ -28,6 +28,12 @@ class MerchantRepo
     @merchants.find { |object| object.id == id }
   end
 
+  def find_multiple_merchants(merchant_ids)
+    merchant_ids.map do |merchant_id|
+      find_by_id(merchant_id)
+    end 
+  end
+
   def find_by_name(name)
     @merchants.find {|object| object.name.downcase == name.downcase }
   end
@@ -76,5 +82,6 @@ class MerchantRepo
   def find_all_customers_for_merchant(id)
     @sales_engine.find_all_customers_for_merchant(id)
   end
-   
+
+
 end

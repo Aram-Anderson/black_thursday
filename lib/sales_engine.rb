@@ -130,4 +130,12 @@ class SalesEngine
     @customers.find_multiple_customers(customer_ids)
   end
 
+ def find_all_merchants_for_customer(customer_id)
+   @invoices.find_all_merchants_for_customer(customer_id)
+ end
+
+ def find_multiple_merchants(merchant_ids)
+   @merchants.find_multiple_merchants(merchant_ids)
+ end
+
 end
