@@ -1,5 +1,5 @@
 require_relative 'merchant'
-require 'CSV'
+require 'csv'
 
 class MerchantRepo
 

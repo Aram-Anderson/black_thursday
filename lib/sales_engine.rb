@@ -3,6 +3,9 @@ require_relative 'merchant_repo'
 require_relative 'invoice_repo'
 require_relative 'item_repo'
 require_relative 'merchant_repo'
+require_relative 'invoice_item_repo'
+require_relative 'customer_repo'
+require_relative 'transaction_repo'
 require 'pry'
 
 class SalesEngine
@@ -13,16 +16,27 @@ class SalesEngine
 
   attr_reader :items,
               :merchants,
-              :invoices
+              :invoices,
+              :invoice_items,
+              :transactions,
+              :customers
 
   def initialize(init_hash)
     @merchants = MerchantRepo.new(init_hash[:merchants], self)
     @items     = ItemRepo.new(init_hash[:items], self)
     @invoices  = InvoiceRepo.new(init_hash[:invoices], self)
+    @invoice_items = InvoiceItemRepo.new(init_hash[:invoice_items], self)
+    @transactions = TransactionRepo.new(init_hash[:transactions], self)
+    @customers = CustomerRepo.new(init_hash[:customers], self)
+
   end
 
   def item(id)
     @items.find_all_by_merchant_id(id)
+  end
+
+  def find_multiple_item_ids(item_ids)
+    @items.find_multiple_item_ids(item_ids)
   end
 
   def merchant(merchant_id)
@@ -90,6 +104,14 @@ class SalesEngine
 
   def invoice_status(symbol)
     @invoices.invoice_status(symbol)
+  end
+
+  def find_items_by_invoice_id(invoice_id)
+     @invoice_items.find_all_items_by_invoice_id(invoice_id)
+  end
+
+  def find_transactions_by_invoice_id(invoice_id)
+    @transactions.find_all_by_invoice_id(invoice_id)
   end
 
 end

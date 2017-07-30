@@ -5,8 +5,10 @@ class CustomerRepo
 
   attr_reader :customers
 
-  def initialize
+  def initialize(file, sales_engine)
+    @sales_engine = sales_engine
     @customers = []
+    from_csv(file)
   end
 
   def from_csv(file)

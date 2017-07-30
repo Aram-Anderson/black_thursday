@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 require_relative 'transaction'
 require 'pry'
 require 'bigdecimal'
@@ -6,8 +6,10 @@ require 'bigdecimal'
 class TransactionRepo
   attr_reader :transactions
 
-  def initialize
+  def initialize(file, sales_engine)
+    @sales_engine = sales_engine
     @transactions = []
+    from_csv(file)
   end
 
   def from_csv(file)

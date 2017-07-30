@@ -137,4 +137,13 @@ class InvoiceRepo
     end
     ((count[symbol].to_f / total) * 100).round(2)
   end
+
+  def find_items_by_invoice_id(invoice_id)
+    @sales_engine.find_items_by_invoice_id(invoice_id)
+  end
+
+  def find_transactions_by_invoice_id(invoice_id)
+    @sales_engine.find_transactions_by_invoice_id(invoice_id)
+  end
+
 end

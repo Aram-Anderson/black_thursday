@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 require_relative 'item'
 require_relative 'std_dev_math'
 require 'pry'
@@ -33,6 +33,13 @@ class ItemRepo
 
   def find_by_id(id)
     @items.find {|object| object.id == id}
+  end
+
+  def find_multiple_item_ids(item_ids)
+    @items.map do |item|
+      item_ids.map do |id| item.id == id
+      end
+    end
   end
 
   def find_by_name(name)
@@ -145,4 +152,5 @@ class ItemRepo
     end
     (array.inject(:+) / array.length)
   end
+
 end
