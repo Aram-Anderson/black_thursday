@@ -118,4 +118,8 @@ class SalesEngine
     @customers.find_by_id(id)
   end
 
+  def get_invoice_from_transaction(invoice_id)
+    @invoices.find_by_id(invoice_id)
+  end
+
 end

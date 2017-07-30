@@ -18,7 +18,7 @@ class TransactionRepo
                       :symbol,
                       :converters =>
                       :all) do |row|
-    @transactions << Transaction.new(row)
+    @transactions << Transaction.new(row, self)
     end
   end
 
@@ -42,6 +42,10 @@ class TransactionRepo
 
   def find_all_by_result(result)
     @transactions.find_all {|trans| trans.result == result}
+  end
+
+  def get_invoice_from_transaction(invoice_id)
+    @sales_engine.get_invoice_from_transaction(invoice_id)
   end
 
   end

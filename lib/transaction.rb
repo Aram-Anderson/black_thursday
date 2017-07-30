@@ -11,7 +11,7 @@ class Transaction
               :updated_at
 
 
-  def initialize(data)
+  def initialize(data, transaction_repo)
     @id                           = data[:id]
     @invoice_id                   = data[:invoice_id]
     @credit_card_number           = data[:credit_card_number]
@@ -19,5 +19,10 @@ class Transaction
     @result                       = data[:result]
     @created_at                   = Time.parse(data[:created_at].to_s)
     @updated_at                   = Time.parse(data[:updated_at].to_s)
+    @transaction_repo             = transaction_repo
+  end
+
+  def invoice
+    @transaction_repo.get_invoice_from_transaction(invoice_id)
   end
 end
