@@ -36,9 +36,8 @@ class ItemRepo
   end
 
   def find_multiple_item_ids(item_ids)
-    @items.map do |item|
-      item_ids.map do |id| item.id == id
-      end
+    item_ids.map do |item_id|
+        find_by_id(item_id)
     end
   end
 

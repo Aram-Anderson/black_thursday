@@ -1,5 +1,6 @@
 require 'csv'
 require_relative 'invoice_item'
+require 'pry'
 
 class InvoiceItemRepo
   attr_reader :invoice_items
@@ -42,8 +43,8 @@ class InvoiceItemRepo
       if invoice_item.invoice_id == invoice_id
           found_item_ids << invoice_item.item_id
       end
-      @sales_engine.find_multiple_item_ids(found_item_ids)
     end
+      @sales_engine.find_multiple_item_ids(found_item_ids)
   end
 
 
