@@ -24,7 +24,7 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_it_has_attributes
-
+skip
     assert_equal 20, @invoice.id
     assert_equal 5, @invoice.customer_id
     assert_equal 12336163, @invoice.merchant_id
@@ -34,16 +34,17 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_it_can_find_items_by_invoice_id
-
+skip
     assert_equal Item, @invoice.items[0].class
   end
 
   def test_transactions
+    skip
     assert_equal 3, @invoice.transactions.count
   end
 
   def test_customer
-    skip
+    assert_instance_of Customer, @invoice.customer
   end
 
 

@@ -146,4 +146,8 @@ class InvoiceRepo
     @sales_engine.find_transactions_by_invoice_id(invoice_id)
   end
 
+  def find_customer_from_invoice(id)
+    @sales_engine.find_customer_from_invoice(id)
+  end
+
 end
