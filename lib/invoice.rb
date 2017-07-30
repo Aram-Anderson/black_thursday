@@ -32,4 +32,9 @@ class Invoice
     @invoice_repo.find_customer_from_invoice(customer_id)
   end
 
+  def is_paid_in_full?
+    #invoice_id passed to transactions? 
+
+  end
+
 end

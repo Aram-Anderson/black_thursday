@@ -47,5 +47,8 @@ skip
     assert_instance_of Customer, @invoice.customer
   end
 
+def test_invoice_is_paid_in_full
+  assert_equal true, @invoice.paid_in_full?
+end
 
 end
