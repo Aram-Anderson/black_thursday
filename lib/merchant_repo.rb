@@ -72,4 +72,9 @@ class MerchantRepo
       find_by_id(id)
     end
   end
+
+  def find_all_customers_for_merchant(id)
+    @sales_engine.find_all_customers_for_merchant(id)
+  end
+   
 end

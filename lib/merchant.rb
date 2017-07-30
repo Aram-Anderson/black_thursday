@@ -22,5 +22,9 @@ class Merchant
     @merchant_repo.invoices(id)
   end
 
+  def customers
+    @merchant_repo.find_all_customers_for_merchant(id)
+  end
+
 
 end

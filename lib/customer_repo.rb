@@ -29,6 +29,12 @@ class CustomerRepo
     @customers.find {|customer| customer.id == id}
   end
 
+  def find_multiple_customers(customer_arr)
+    customer_arr.map do |customer_id|
+      find_by_id(customer_id)
+    end
+  end
+
   def find_all_by_first_name(name)
     @customers.find_all do |customer|
       customer.first_name.include? name

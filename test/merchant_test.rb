@@ -30,4 +30,18 @@ class MerchantTest < Minitest::Test
     assert_equal 7, @merchant.updated_at
   end
 
+  def test_it_can_find_customers
+    se = SalesEngine.from_csv({
+    :items => "./data/items.csv",
+    :merchants => "./data/merchants.csv",
+    :invoices => "./data/invoices.csv",
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"
+    })
+    merchant = se.merchants.find_by_id(12335938)
+
+    assert_equal 16, merchant.customers.count
+  end
+
 end

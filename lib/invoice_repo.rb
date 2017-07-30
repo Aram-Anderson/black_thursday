@@ -38,6 +38,16 @@ class InvoiceRepo
     end
   end
 
+  def find_all_customers_for_merchant(merchant_id)
+    customer_ids = []
+    @invoices.each do |invoice|
+      if invoice.merchant_id == merchant_id
+        customer_ids << invoice.customer_id
+      end
+    end
+      @sales_engine.find_multiple_customers(customer_ids)
+  end
+
   def find_all_by_merchant_id(id)
     @invoices.find_all do |invoice|
       invoice.merchant_id == id
