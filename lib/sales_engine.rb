@@ -204,4 +204,21 @@ class SalesEngine
     @merchants.find_invoice_merchants(merch_ids_to_pass)
   end
 
+  def merchants_with_pending_invoices
+    #almost certainly missing a flatten somewhere in here. 
+    merchant_ids = @merchants.get_all_merchant_ids
+    @merchants.merchants_with_pending_invoices
+
+    hash_of_merchants_and_i_items = @invoice_items.get_hash_of_all_invoice_items(hash_of_merchants_and_invoices)
+
+    hash_of_merchants_and_pending_invoices = @transactions.find_pending_invoices(  hash_of_merchants_and_i_items)
+
+    merchants_with_pending_invoices = []
+    hash_of_merchants_and_pending_invoices.each_key do |merch_id|
+     merchant = @merchants.find_by_id(merch_id)
+      merchants_with_pending_invoices << merchant
+    end
+     merchants_with_pending_invoices
+  end
+
 end

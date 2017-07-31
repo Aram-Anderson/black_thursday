@@ -62,4 +62,8 @@ class SalesAnalyst
     @engine.top_revenue_earners(num)
   end
 
+  def merchants_with_pending_invoices
+    @engine.merchants_with_pending_invoices 
+  end
+
 end

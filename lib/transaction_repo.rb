@@ -46,4 +46,24 @@ class TransactionRepo
     @sales_engine.get_invoice_from_transaction(invoice_id)
   end
 
+  def find_pending_invoices(hash_of_merchants_and_i_items)
+    trans_results = []
+    pending_invoices = []
+    hash_of_merchants_and_i_items.each do |merchant_id, i_item_arr|
+      i_item_arr.each do |i_item|
+        transactions = find_all_by_invoice_id(i_item.invoice_id)
+        transactions.each do |transaction|
+           trans_results << transaction.result
+          end
+          pending_invoices = trans_results.all? |transaction|
+            transaction.status == "failed" #returns true if all transactions are failed
+        end
+        [:merchant_id] = pending_invoices #not sure about syntax here, bc i think we're still in the loop for this merch_id key - at least, that's the idea
+      end
+      hash_of_merchants_and_pending_invoices = hash_of_merchants_and_invoices.each do |merch, pending|
+        delete_if pending == false
+      end
+      hash_of_merchants_and_pending_invoices
+    end
+
   end
