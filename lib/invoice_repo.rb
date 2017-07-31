@@ -204,4 +204,15 @@ class InvoiceRepo
     end
   end
 
+  def merchants_with_pending_invoices(merchant_ids)
+    merch_and_inv_hash = get_hash_of_invoice_ids(merchant_ids)
+    merch_and_inv_hash.each do |merch, inv_arr|
+        inv_arr.delete_if{|id|is_it_paid_in_full?(id)}
+    end
+    merch_and_inv_hash.delete_if{|merch, inv_arr| inv_arr.empty?}
+    merch_ids_to_find = merch_and_inv_hash.keys
+    @sales_engine.find_multiple_merchants(merch_ids_to_find)
+  end
+
+
 end

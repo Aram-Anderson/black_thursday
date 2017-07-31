@@ -46,24 +46,48 @@ class TransactionRepo
     @sales_engine.get_invoice_from_transaction(invoice_id)
   end
 
-  def find_pending_invoices(hash_of_merchants_and_i_items)
-    trans_results = []
-    pending_invoices = []
-    hash_of_merchants_and_i_items.each do |merchant_id, i_item_arr|
-      i_item_arr.each do |i_item|
-        transactions = find_all_by_invoice_id(i_item.invoice_id)
-        transactions.each do |transaction|
-           trans_results << transaction.result
-          end
-          pending_invoices = trans_results.all? |transaction|
-            transaction.status == "failed" #returns true if all transactions are failed
-        end
-        [:merchant_id] = pending_invoices #not sure about syntax here, bc i think we're still in the loop for this merch_id key - at least, that's the idea
-      end
-      hash_of_merchants_and_pending_invoices = hash_of_merchants_and_invoices.each do |merch, pending|
-        delete_if pending == false
-      end
-      hash_of_merchants_and_pending_invoices
-    end
-
+  def find_pending_invoices(hash_of_merchants_and_invoice_ids)
+    find_pending_invoices_helper1(hash_of_merchants_and_invoice_ids)
   end
+
+
+  #   def find_pending_invoices_helper1(hash_of_merchants_and_invoice_ids)
+  #       hash_of_merchants_and_invoice_ids.each do |merchant_id, invoice_arr|
+  #     transactions = []
+  #     invoice_arr.each do |invoice_id|
+  #       transactions <<  find_all_by_invoice_id(invoice_id)
+  #     end
+  #     binding.pry
+  #     transactions.flatten.delete_if
+  #     hash_of_merchants_and_invoice_ids[merchant_id] = transactions.flatten
+  #   end
+  #     hash_of_merchants_and_invoice_ids.each do |merch, trans|
+  #       trans_results = []
+  #       trans.each do |trans|
+  #         trans_results << trans.result
+  #       end
+  #       hash_of_merchants_and_invoice_ids[merch] = trans_results.flatten
+  #       hash_of_merchants_and_invoice_ids.delete_if {|k,v| v.all? == "success"}
+  #     end
+  #
+  # end
+  #
+  # def find_pending_invoices_helper2(hash_of_merchants_and_transactions)
+  #   hash_of_merchants_and_transactions.each do |merchant, transaction_arr|
+  #     trans_results = []
+  #     pending_invoices = []
+  #     transaction_arr.each do |transaction|
+  #       trans_results << transaction.result
+  #     end
+  #     pending_invoices = trans_results.any? {|transaction| transaction == "failed"}
+  #     hash_of_merchants_and_transactions[merchant] = pending_invoices
+  #   end
+  #   binding.pry
+  #     hash_of_merchants_and_pending_invoices = hash_of_merchants_and_invoices.each do |merch, pending|
+  #       delete_if pending == false
+  #     end
+  #     hash_of_merchants_and_pending_invoices
+  #   end
+
+
+end

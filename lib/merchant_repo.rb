@@ -86,7 +86,7 @@ class MerchantRepo
   def get_all_merchant_ids
     merchant_ids = Hash.new
     @merchants.map do |merchant|
-      merchant_ids[merchant.id] = [0]
+      merchant_ids[merchant.id] = []
     end
     merchant_ids
   end
