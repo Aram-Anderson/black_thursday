@@ -192,7 +192,7 @@ class SalesEngine
     hash_of_invoice_items.each do |merchant_id, invoice_item_array|
       prices = []
       invoice_item_array.each do |invoice_item|
-        prices << invoice_item.unit_price
+        prices << invoice_item.unit_price * invoice_item.quantity
       end
       prices.flatten!
       hash_of_invoice_items[merchant_id] = prices.inject(:+)
