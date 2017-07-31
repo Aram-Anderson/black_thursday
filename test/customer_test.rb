@@ -25,7 +25,7 @@ class CustomerTest < Minitest::Test
                              :last_name => "Clarke",
                              :created_at => Time.now,
                              :updated_at => Time.now
-                           })
+                           }, "things")
     assert_equal 6, customer.id
     assert_equal "Joan", customer.first_name
     assert_equal "Clarke", customer.last_name

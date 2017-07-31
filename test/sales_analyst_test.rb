@@ -106,7 +106,7 @@ skip
     assert_equal 12334634, first.id
 
     assert_instance_of Merchant, last
-    assert_equal 12336257, last.id
+    assert_equal 12335747, last.id
   end
 
   def test_it_returns_merchants_with_pending_invoices
