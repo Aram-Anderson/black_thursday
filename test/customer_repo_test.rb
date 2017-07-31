@@ -1,12 +1,21 @@
 require 'minitest'
 require 'minitest/autorun'
 require './lib/customer_repo'
+require './lib/sales_engine'
 
 class CustomerRepoTest < Minitest::Test
 
   def setup
-    @cr = CustomerRepo.new
-    @cr.from_csv('./data/customers.csv')
+    @se = SalesEngine.from_csv({
+    :items => "./data/items.csv",
+    :merchants => "./data/merchants.csv",
+    :invoices => "./data/invoices.csv",
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"
+    })
+
+    @cr = @se.customers
   end
 
   def test_it_exists
