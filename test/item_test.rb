@@ -1,6 +1,5 @@
 require 'minitest'
 require 'minitest/autorun'
-require 'minitest/emoji'
 require './lib/item'
 require './lib/sales_engine'
 require 'pry'

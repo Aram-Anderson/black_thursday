@@ -54,4 +54,12 @@ class SalesAnalyst
     @engine.invoice_status(symbol)
   end
 
+  def total_revenue_by_date(date)
+    @engine.total_revenue_by_date(date)
+  end
+
+  def top_revenue_earners(num = 20)
+    @engine.top_revenue_earners(num)
+  end
+
 end

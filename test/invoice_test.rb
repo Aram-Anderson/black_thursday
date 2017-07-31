@@ -1,6 +1,5 @@
 require 'minitest'
 require 'minitest/autorun'
-require 'minitest/emoji'
 require './lib/invoice'
 require './lib/sales_engine'
 

@@ -179,4 +179,30 @@ class InvoiceRepo
     @sales_engine.get_total_for_invoice(invoice_id)
   end
 
+  def total_revenue_by_date(date)
+    invoice_array = find_revenue_by_date_helper(date)
+    @sales_engine.invoices_for_total_revenue_by_date(invoice_array)
+  end
+
+  def find_revenue_by_date_helper(date)
+    invoice_ids = []
+    @invoices.each do |invoice|
+      if invoice.created_at.strftime('%Y-%m-%d') == date.strftime('%Y-%m-%d')
+        invoice_ids << invoice.id
+      end
+    end
+    invoice_ids
+  end
+
+  def get_hash_of_invoice_ids(merchant_ids)
+    merchant_ids.each do |merchant_id|
+      @invoices.each do |invoice|
+        if invoice.merchant_id == merchant_id[0]
+          merchant_id[1] << invoice.id
+        end
+      end
+    end
+  end
+
+
 end

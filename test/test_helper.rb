@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'minitest/nyan_cat'
 SimpleCov.start do
   add_filter 'test/'
 end
@@ -13,3 +14,7 @@ require_relative 'invoice_repo_test'
 require_relative 'invoice_test'
 require_relative 'invoice_item_repo_test'
 require_relative 'invoice_item_test'
+require_relative 'customer_test'
+require_relative 'customer_repo_test'
+require_relative 'transaction_test'
+require_relative 'transaction_repo_test'

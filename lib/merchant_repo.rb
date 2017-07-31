@@ -83,5 +83,12 @@ class MerchantRepo
     @sales_engine.find_all_customers_for_merchant(merchant_id)
   end
 
+  def get_all_merchant_ids
+    merchant_ids = Hash.new
+    @merchants.map do |merchant|
+      merchant_ids[merchant.id] = [0]
+    end
+    merchant_ids
+  end
 
 end

@@ -1,8 +1,8 @@
 require 'minitest'
 require 'minitest/autorun'
-require_relative '../lib/merchant'
-require_relative '../lib/sales_engine'
-require_relative '../lib/merchant_repo'
+require './lib/merchant'
+require './lib/sales_engine'
+require './lib/merchant_repo'
 require 'pry'
 
 

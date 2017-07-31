@@ -1,6 +1,5 @@
 require 'minitest'
 require 'minitest/autorun'
-require 'minitest/emoji'
 require './lib/sales_analyst'
 require './lib/sales_engine'
 
@@ -46,10 +45,12 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_it_can_find_high_item_count_merchants
+
     assert_equal 52, @sa.merchants_with_high_item_count.length
   end
 
   def test_it_can_find_average_price_per_merchant
+
     assert_equal 16.66, @sa.average_item_price_for_merchant(12334105)
 
     assert_equal 76.67, @sa.average_item_price_for_merchant(12334155)
@@ -58,30 +59,54 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_average_average_price_per_merchant
+
     assert_equal 350.29, @sa.average_average_price_per_merchant
   end
 
   def test_golden_items
+
     assert_equal 5, @sa.golden_items.count
   end
 
   def test_it_can_find_top_performing_merchants_from_invoice_count
+
     assert_equal 12, @sa.top_merchants_by_invoice_count.count
   end
 
   def test_it_can_find_bottom_performing_merchants_by_invoice
+
     assert_equal 4, @sa.bottom_merchants_by_invoice_count.count
   end
 
   def test_it_can_find_top_days_by_invoice_count
+
     assert_equal ["Wednesday"], @sa.top_days_by_invoice_count
   end
 
   def test_it_can_return_percentage_of_invoices_by_status
+
     assert_equal 29.55, @sa.invoice_status(:pending)
   end
 
   def test_it_can_find_total_revenue_by_date
-    assert_equal 57455685.56, @sa.total_revenue_by_date("2012-03-27")
+
+    date = Time.parse("2009-02-07")
+    assert_equal 21067.77, @sa.total_revenue_by_date(date)
   end
+
+  def test_it_returns_top_revenue_earners
+
+    expected = @sa.top_revenue_earners(10)
+    first = expected.first
+    last = expected.last
+
+    assert_equal 10, expected.length
+
+    assert_instance_of Merchant, first
+    assert_equal 12334634, first.id
+
+    assert_instance_of Merchant, last
+    assert_equal 12336257, last.id
+  end
+
 end

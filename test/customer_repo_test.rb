@@ -1,6 +1,5 @@
 require 'minitest'
 require 'minitest/autorun'
-require 'minitest/nyan_cat'
 require './lib/customer_repo'
 
 class CustomerRepoTest < Minitest::Test

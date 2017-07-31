@@ -1,6 +1,5 @@
 require 'minitest'
 require 'minitest/autorun'
-require 'minitest/pride'
 require 'time'
 require './lib/customer'
 require './lib/sales_engine'

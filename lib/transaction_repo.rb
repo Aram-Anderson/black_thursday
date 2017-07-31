@@ -34,7 +34,7 @@ class TransactionRepo
 
   def find_all_by_credit_card_number(credit_card_number)
     @transactions.find_all do |trans|
-      trans.credit_card_number == (credit_card_number)
+      trans.credit_card_number == credit_card_number
     end
   end
 

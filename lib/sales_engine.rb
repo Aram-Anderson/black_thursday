@@ -163,7 +163,7 @@ class SalesEngine
 
   def remove_unpaid_invoice_items(all_invoice_items)
     paid_i_items = []
-    all_invoice_items.each do |i_item|
+    all_invoice_items.flatten.each do |i_item|
       if is_it_paid_in_full?(i_item.invoice_id)
         paid_i_items << i_item
       end
@@ -171,4 +171,37 @@ class SalesEngine
     paid_i_items
   end
 
+  def total_revenue_by_date(date)
+    @invoices.total_revenue_by_date(date)
   end
+
+  def invoices_for_total_revenue_by_date(invoice_array)
+    @invoice_items.total_revenue_by_date(invoice_array)
+  end
+
+  def top_revenue_earners(num)
+    merchant_ids = @merchants.get_all_merchant_ids
+    hash_of_merchants_and_invoices =
+    @invoices.get_hash_of_invoice_ids(merchant_ids)
+    hash_of_invoice_items =
+    @invoice_items.get_hash_of_all_invoice_items(hash_of_merchants_and_invoices)
+    hash_of_invoice_items.each do |merchant_id, invoice_item_array|
+      hash_of_invoice_items[merchant_id] =
+      remove_unpaid_invoice_items(invoice_item_array)
+    end
+    hash_of_invoice_items.each do |merchant_id, invoice_item_array|
+      prices = []
+      invoice_item_array.each do |invoice_item|
+        prices << invoice_item.unit_price
+      end
+      prices.flatten!
+      hash_of_invoice_items[merchant_id] = prices.inject(:+)
+    end
+    hash_of_invoice_items.delete_if {|key, value| value.nil?}
+    sorted_hash = hash_of_invoice_items.sort_by {|key, value| value}.reverse
+    merchs_to_find = sorted_hash.shift(num)
+    merch_ids_to_pass = merchs_to_find.map {|merch| merch[0]}
+    @merchants.find_invoice_merchants(merch_ids_to_pass)
+  end
+
+end
