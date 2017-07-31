@@ -180,6 +180,27 @@ class SalesEngine
   end
 
   def top_revenue_earners(num)
+    hash_of_merchants_and_revenue = get_merchants_with_revenue
+    hash_of_merchants_and_revenue.delete_if {|key, value| value.nil?}
+    sorted_array = hash_of_merchants_and_revenue.sort_by {|key, value| value}.reverse
+    merchs_to_find = sorted_array.shift(num)
+    merch_ids_to_pass = merchs_to_find.map {|merch| merch[0]}
+    @merchants.find_invoice_merchants(merch_ids_to_pass)
+  end
+
+  def merchants_ranked_by_revenue
+    hash_of_merchants_and_revenue = get_merchants_with_revenue
+    hash_of_merchants_and_revenue.each do |k, v|
+      if v.nil?
+        hash_of_merchants_and_revenue[k] = 0
+      end
+    end
+    sorted_array = hash_of_merchants_and_revenue.sort_by {|key, value| value}.reverse
+    merch_ids_to_pass = sorted_array.map {|merch| merch[0]}
+    @merchants.find_invoice_merchants(merch_ids_to_pass)
+  end
+
+  def get_merchants_with_revenue
     merchant_ids = @merchants.get_all_merchant_ids
     hash_of_merchants_and_invoices =
     @invoices.get_hash_of_invoice_ids(merchant_ids)
@@ -197,15 +218,9 @@ class SalesEngine
       prices.flatten!
       hash_of_invoice_items[merchant_id] = prices.inject(:+)
     end
-    hash_of_invoice_items.delete_if {|key, value| value.nil?}
-    sorted_hash = hash_of_invoice_items.sort_by {|key, value| value}.reverse
-    merchs_to_find = sorted_hash.shift(num)
-    merch_ids_to_pass = merchs_to_find.map {|merch| merch[0]}
-    @merchants.find_invoice_merchants(merch_ids_to_pass)
   end
 
   def merchants_with_pending_invoices
-
     merchant_ids = @merchants.get_all_merchant_ids
     @invoices.merchants_with_pending_invoices(merchant_ids)
 

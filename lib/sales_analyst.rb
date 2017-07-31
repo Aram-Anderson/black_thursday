@@ -63,7 +63,11 @@ class SalesAnalyst
   end
 
   def merchants_with_pending_invoices
-    @engine.merchants_with_pending_invoices 
+    @engine.merchants_with_pending_invoices
+  end
+
+  def merchants_ranked_by_revenue
+    @engine.merchants_ranked_by_revenue
   end
 
 end
