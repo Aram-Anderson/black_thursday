@@ -70,4 +70,8 @@ class SalesAnalyst
     @engine.merchants_ranked_by_revenue
   end
 
+  def revenue_by_merchant(merchant_id)
+    @engine.revenue_by_merchant(merchant_id)
+  end
+
 end

@@ -226,4 +226,9 @@ class SalesEngine
 
   end
 
+  def revenue_by_merchant(merchant_id)
+    all_revenue_for_merchant = get_merchants_with_revenue
+    all_revenue_for_merchant[merchant_id]
+  end
+
 end
