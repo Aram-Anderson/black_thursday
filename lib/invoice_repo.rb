@@ -214,5 +214,15 @@ class InvoiceRepo
     @sales_engine.find_multiple_merchants(merch_ids_to_find)
   end
 
+  def best_item_for_merchant(merch_id)
+    invoice_id_hash = Hash.new []
+    @invoices.each do |invoice|
+      if invoice.merchant_id == merch_id
+        invoice_id_hash[invoice.id] = []
+      end
+    end
+    invoice_id_hash
+  end
+
 
 end

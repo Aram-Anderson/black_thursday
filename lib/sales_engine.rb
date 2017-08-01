@@ -231,8 +231,15 @@ class SalesEngine
   end
 
   def best_item_for_merchant(merch_id)
-    items_and_i_items_hash = @items.best_item_for_merchant(merch_id)
-    sum_totals_from_i_items(items_and_i_items_hash)
+    invoices_id_hash = @invoices.best_item_for_merchant(merch_id)
+
+    invoice_ids_and_i_items_hash = @invoice_items.get_inv_items_from_invoice_ids(invoices_id_hash)
+
+    paid_i_items_hash =
+    invoice_ids_and_i_items_hash.each do |k, v|
+      remove_unpaid_invoice_items(v)
+    end
+    sum_totals_from_i_items(paid_i_items_hash)
   end
 
   def sum_totals_from_i_items(items_and_i_items_hash)
@@ -241,8 +248,11 @@ class SalesEngine
       v.each do |i_item|
         totals << i_item.quantity * i_item.unit_price
       end
+      binding.pry
       items_and_i_items_hash[k] = totals.inject(:+)
+      binding.pry
     end
+    binding.pry
     item_to_find = items_and_i_items_hash.key(items_and_i_items_hash.values.max)
     @items.find_by_id(item_to_find)
   end
