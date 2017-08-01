@@ -109,7 +109,39 @@ skip
     assert_equal 12335747, last.id
   end
 
-  def test_it_returns_merchants_with_pending_invoices
+  # def test_it_returns_merchants_with_pending_invoices
+  #   @se = SalesEngine.from_csv({
+  #   :items => "./data/items.csv",
+  #   :merchants => "./data/merchants.csv",
+  #   :invoices => "./data/invoices.csv",
+  #   :invoice_items => "./data/invoice_items.csv",
+  #   :transactions => "./data/transactions.csv",
+  #   :customers => "./data/customers.csv"
+  #   })
+  #
+  #   @sa = SalesAnalyst.new(@se)
+  #
+  #   assert_equal 467,  @sa.merchants_with_pending_invoices.length
+  #   assert_equal Merchant, @sa.merchants_with_pending_invoices.first.class
+  # end
+  #
+  # def test_it_can_find_revenue_for_a_merchant
+  #
+  #
+  #   @se = SalesEngine.from_csv({
+  #   :items => "./data/items.csv",
+  #   :merchants => "./data/merchants.csv",
+  #   :invoices => "./data/invoices.csv",
+  #   :invoice_items => "./data/invoice_items.csv",
+  #   :transactions => "./data/transactions.csv",
+  #   :customers => "./data/customers.csv"
+  #   })
+  #
+  #   @sa = SalesAnalyst.new(@se)
+  #     assert_equal 5, @sa.revenue_by_merchant(12334194)
+  # end
+
+  def test_it_can_find_top_item_for_merchant
     @se = SalesEngine.from_csv({
     :items => "./data/items.csv",
     :merchants => "./data/merchants.csv",
@@ -121,24 +153,14 @@ skip
 
     @sa = SalesAnalyst.new(@se)
 
-    assert_equal 467,  @sa.merchants_with_pending_invoices.length
-    assert_equal Merchant, @sa.merchants_with_pending_invoices.first.class
+    thing = @sa.best_item_for_merchant(12334189)
+
+    assert_equal 263516130, thing.id
+    assert_instance_of Item, thing
+
+    other_thing = @sa.best_item_for_merchant(12337105)
+
+    assert_equal 263463003, other_thing.id
+    assert_instance_of Item, other_thing
   end
-
-  def test_it_can_find_revenue_for_a_merchant
-
-
-    @se = SalesEngine.from_csv({
-    :items => "./data/items.csv",
-    :merchants => "./data/merchants.csv",
-    :invoices => "./data/invoices.csv",
-    :invoice_items => "./data/invoice_items.csv",
-    :transactions => "./data/transactions.csv",
-    :customers => "./data/customers.csv"
-    })
-
-    @sa = SalesAnalyst.new(@se)
-      assert_equal 5, @sa.revenue_by_merchant(12334194)
-  end
-
 end

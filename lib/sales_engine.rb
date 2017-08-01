@@ -223,12 +223,38 @@ class SalesEngine
   def merchants_with_pending_invoices
     merchant_ids = @merchants.get_all_merchant_ids
     @invoices.merchants_with_pending_invoices(merchant_ids)
-
   end
 
   def revenue_by_merchant(merchant_id)
     all_revenue_for_merchant = get_merchants_with_revenue
     all_revenue_for_merchant[merchant_id]
+  end
+
+  def best_item_for_merchant(merch_id)
+    items_and_i_items_hash = @items.best_item_for_merchant(merch_id)
+    sum_totals_from_i_items(items_and_i_items_hash)
+  end
+
+  def sum_totals_from_i_items(items_and_i_items_hash)
+    items_and_i_items_hash.each do |k, v|
+      totals = []
+      v.each do |i_item|
+        totals << i_item.quantity * i_item.unit_price
+      end
+      items_and_i_items_hash[k] = totals.inject(:+)
+    end
+    item_to_find = items_and_i_items_hash.key(items_and_i_items_hash.values.max)
+    @items.find_by_id(item_to_find)
+  end
+
+  def pass_item_id_hash(item_id_hash)
+    @invoice_items.get_inv_items_from_item_ids(item_id_hash)
+  end
+
+  def all_item_i_items(item_id_hash)
+    item_id_hash.each do |k, v|
+      item_id_hash[k] = remove_unpaid_invoice_items(v)
+    end
   end
 
 end

@@ -152,4 +152,18 @@ class ItemRepo
     (array.inject(:+) / array.length)
   end
 
+  def best_item_for_merchant(merch_id)
+    item_id_hash = Hash.new
+    array_of_item_ids = []
+    @items.each do |item|
+      if item.merchant_id == merch_id
+        array_of_item_ids << item.id
+      end
+    end
+    array_of_item_ids.each do |item_id|
+      item_id_hash[item_id] = []
+    end
+    @sales_engine.pass_item_id_hash(item_id_hash)
+  end
+
 end

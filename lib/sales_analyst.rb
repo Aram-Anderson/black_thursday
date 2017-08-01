@@ -74,4 +74,8 @@ class SalesAnalyst
     @engine.revenue_by_merchant(merchant_id)
   end
 
+  def best_item_for_merchant(merch_id)
+    @engine.best_item_for_merchant(merch_id)
+  end
+
 end

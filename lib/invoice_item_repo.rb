@@ -75,4 +75,17 @@ class InvoiceItemRepo
     end
   end
 
+  def get_inv_items_from_item_ids(item_id_hash)
+    item_id_hash.each do |k, v|
+      i_item_array = []
+      @invoice_items.each do |i_item|
+        if i_item.item_id == k
+          i_item_array << i_item
+        end
+      end
+      item_id_hash[k] = i_item_array
+    end
+    @sales_engine.all_item_i_items(item_id_hash)
+  end
+
 end
