@@ -215,7 +215,7 @@ class InvoiceRepo
   end
 
   def best_item_for_merchant(merch_id)
-    invoice_id_hash = Hash.new []
+    invoice_id_hash = Hash.new
     @invoices.each do |invoice|
       if invoice.merchant_id == merch_id
         invoice_id_hash[invoice.id] = []

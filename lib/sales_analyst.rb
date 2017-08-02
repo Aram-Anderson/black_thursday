@@ -78,4 +78,8 @@ class SalesAnalyst
     @engine.best_item_for_merchant(merch_id)
   end
 
+  def merchants_with_only_one_item
+    @engine.merchants_with_only_one_item
+  end
+
 end

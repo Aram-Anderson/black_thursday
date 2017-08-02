@@ -166,4 +166,12 @@ class ItemRepo
     @sales_engine.pass_item_id_hash(item_id_hash)
   end
 
+  def merchants_with_only_one_item(merchant_ids)
+      merchant_ids.each do |merch_id, arr|
+      merchant_ids[merch_id] =   find_all_by_merchant_id(merch_id)
+      end
+      merchant_ids.delete_if {|merch_id, arr| arr.length !=1}
+      @sales_engine.collect_merchants_with_only_one_item(merchant_ids)
+  end
+
 end

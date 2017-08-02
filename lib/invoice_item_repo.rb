@@ -85,8 +85,17 @@ class InvoiceItemRepo
       end
       invoices_id_hash[k] = i_item_array
     end
-    invoices_id_hash
+    create_new_hash_of_item_id_i_item(invoices_id_hash)
     # @sales_engine.all_item_i_items(item_id_hash)
+  end
+
+  def create_new_hash_of_item_id_i_item(invoices_id_hash)
+    item_id_i_item_hash = Hash.new
+    invoices_id_hash.each do |k, v|
+      max_i_item = v.max_by {|i_item| i_item.quantity * i_item.unit_price}
+      item_id_i_item_hash[max_i_item.item_id] = v
+    end
+    item_id_i_item_hash
   end
 
 end
