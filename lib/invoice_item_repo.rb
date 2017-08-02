@@ -76,14 +76,14 @@ class InvoiceItemRepo
   end
 
   def get_inv_items_from_invoice_ids(invoices_id_hash)
-    invoices_id_hash.each do |k, v|
+    invoices_id_hash.each do |invoice_id, i_item|
       i_item_array = []
       @invoice_items.each do |i_item|
-        if i_item.invoice_id == k
+        if i_item.invoice_id == invoice_id
           i_item_array << i_item
         end
       end
-      invoices_id_hash[k] = i_item_array
+      invoices_id_hash[invoice_id] = i_item_array
     end
     create_new_hash_of_item_id_i_item(invoices_id_hash)
     # @sales_engine.all_item_i_items(item_id_hash)
@@ -97,5 +97,31 @@ class InvoiceItemRepo
     end
     item_id_i_item_hash
   end
+
+  def get_inv_items_from_invoice_ids_for_most_sold(invoices_id_hash)
+    invoices_id_hash.each do |invoice_id, i_item|
+      i_item_array = []
+      @invoice_items.each do |i_item|
+        if i_item.invoice_id == invoice_id
+          i_item_array << i_item
+        end
+      end
+      invoices_id_hash[invoice_id] = i_item_array
+    end
+    create_new_hash_of_item_id_i_item_for_most_sold(invoices_id_hash)
+    # @sales_engine.all_item_i_items(item_id_hash)
+  end
+
+  def create_new_hash_of_item_id_i_item_for_most_sold(invoices_id_hash)
+    item_id_i_item_hash = Hash.new
+    invoices_id_hash.each do |k, v|
+      max_i_item = v.max_by {|i_item| i_item.quantity}
+      unless max_i_item.nil?
+      item_id_i_item_hash[max_i_item.item_id] = v
+      end
+    end
+    item_id_i_item_hash
+  end
+
 
 end

@@ -278,20 +278,38 @@ class SalesEngine
     merch_arr
   end
 
-  def most_sold_item_for_merchant(merchant_ids)
-    invoices_id_hash = @invoices.best_item_for_merchant(merch_id)
+  def most_sold_item_for_merchant(merchant_id)
+    invoices_id_hash = @invoices.best_item_for_merchant(merchant_id)
 
     invoice_ids_and_i_items_hash =
-    @invoice_items.get_inv_items_from_invoice_ids(invoices_id_hash)
+    @invoice_items.get_inv_items_from_invoice_ids_for_most_sold(invoices_id_hash)
+
     paid_i_items_hash = Hash.new
     invoice_ids_and_i_items_hash.each do |k, v|
       paid_i_items_hash[k] = remove_unpaid_invoice_items(v)
     end
     find_most_sold_i_items(paid_i_items_hash)
+
   end
 
    def find_most_sold_i_items(paid_i_items_hash)
-     
+     paid_i_items_hash.delete_if {|k, v| v.empty?}
+     paid_i_items_hash.each do |k, v|
+       totals = []
+       v.each do |i_item|
+         totals << i_item.quantity
+       end
+       paid_i_items_hash[k] = totals.inject(:+)
+       end
+       quantity_max = paid_i_items_hash.values.max
+       binding.pry
+       item_to_find = []
+       paid_i_items_hash.each do |item_id, quantity|
+         if quantity == quantity_max
+           item_to_find << item_id
+          end
+       end
+       @items.find_multiple_item_ids(item_to_find)
    end
 
   def merchants_with_only_one_item_registered_in_month(month)

@@ -140,8 +140,19 @@ class SalesAnalystTest < Minitest::Test
   #   assert_equal 243, @sa.merchants_with_only_one_item.length
   # end
 
-  def test_it_can_find_merchants_with_only_one_item_registered_in_month
-    assert_equal 21, @sa.merchants_with_only_one_item_registered_in_month("March").length
-    assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("March").first
+  # def test_it_can_find_merchants_with_only_one_item_registered_in_month
+  #   assert_equal 21, @sa.merchants_with_only_one_item_registered_in_month("March").length
+  #   assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("March").first
+  # end
+
+  def test_it_can_find_most_sold_item
+    # assert_equal 263524984, @sa.most_sold_item_for_merchant(12334189).first.id
+    #
+    # assert_equal 1, @sa.most_sold_item_for_merchant(12334189).length
+
+    assert_equal 4, @sa.most_sold_item_for_merchant(12337105).length
+
   end
+
+
 end
