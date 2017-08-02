@@ -180,22 +180,22 @@ class SalesEngine
   end
 
   def top_revenue_earners(num)
-    hash_of_merchants_and_revenue = get_merchants_with_revenue
-    hash_of_merchants_and_revenue.delete_if {|key, value| value.nil?}
-    sorted_array = hash_of_merchants_and_revenue.sort_by {|key, value| value}.reverse
+    hash_of_merch_and_rev = get_merchants_with_revenue
+    hash_of_merch_and_rev.delete_if {|key, value| value.nil?}
+    sorted_array = hash_of_merch_and_rev.sort_by {|key, value| value}.reverse
     merchs_to_find = sorted_array.shift(num)
     merch_ids_to_pass = merchs_to_find.map {|merch| merch[0]}
     @merchants.find_invoice_merchants(merch_ids_to_pass)
   end
 
   def merchants_ranked_by_revenue
-    hash_of_merchants_and_revenue = get_merchants_with_revenue
-    hash_of_merchants_and_revenue.each do |k, v|
+    hash_of_merch_and_rev = get_merchants_with_revenue
+    hash_of_merch_and_rev.each do |k, v|
       if v.nil?
-        hash_of_merchants_and_revenue[k] = 0
+        hash_of_merch_and_rev[k] = 0
       end
     end
-    sorted_array = hash_of_merchants_and_revenue.sort_by {|key, value| value}.reverse
+    sorted_array = hash_of_merch_and_rev.sort_by {|key, value| value}.reverse
     merch_ids_to_pass = sorted_array.map {|merch| merch[0]}
     @merchants.find_invoice_merchants(merch_ids_to_pass)
   end
@@ -233,26 +233,24 @@ class SalesEngine
   def best_item_for_merchant(merch_id)
     invoices_id_hash = @invoices.best_item_for_merchant(merch_id)
 
-    invoice_ids_and_i_items_hash = @invoice_items.get_inv_items_from_invoice_ids(invoices_id_hash)
-
-    paid_i_items_hash =
+    invoice_ids_and_i_items_hash =
+    @invoice_items.get_inv_items_from_invoice_ids(invoices_id_hash)
+    paid_i_items_hash = Hash.new
     invoice_ids_and_i_items_hash.each do |k, v|
-      remove_unpaid_invoice_items(v)
+      paid_i_items_hash[k] = remove_unpaid_invoice_items(v)
     end
     sum_totals_from_i_items(paid_i_items_hash)
   end
 
   def sum_totals_from_i_items(items_and_i_items_hash)
+    items_and_i_items_hash.delete_if {|k, v| v.empty?}
     items_and_i_items_hash.each do |k, v|
       totals = []
       v.each do |i_item|
         totals << i_item.quantity * i_item.unit_price
       end
-      binding.pry
       items_and_i_items_hash[k] = totals.inject(:+)
-      binding.pry
     end
-    binding.pry
     item_to_find = items_and_i_items_hash.key(items_and_i_items_hash.values.max)
     @items.find_by_id(item_to_find)
   end
