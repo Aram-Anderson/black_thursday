@@ -2,6 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require './lib/sales_analyst'
 require './lib/sales_engine'
+require 'bigdecimal'
 
 class SalesAnalystTest < Minitest::Test
 
@@ -116,7 +117,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_it_can_find_revenue_for_a_merchant
-      assert_equal 0.815724e5, @sa.revenue_by_merchant(12334194)
+      assert_equal BigDecimal.new(81572.4, 6), @sa.revenue_by_merchant(12334194)
   end
 
   def test_it_can_find_top_item_for_merchant
@@ -130,7 +131,7 @@ class SalesAnalystTest < Minitest::Test
 
     other_thing = @sa.best_item_for_merchant(12337105)
 
-    assert_equal 263463003, other_thing.id
+    assert_equal 263431273, other_thing.id
     assert_instance_of Item, other_thing
   end
 end
