@@ -82,4 +82,12 @@ class SalesAnalyst
     @engine.merchants_with_only_one_item
   end
 
+  def merchants_with_only_one_item_registered_in_month(month)
+    @engine.merchants_with_only_one_item_registered_in_month(month)
+  end
+
+  def most_sold_item_for_merchant(merchant_id)
+    @engine.most_sold_item_for_merchant(merchant_id)
+  end
+
 end

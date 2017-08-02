@@ -278,4 +278,50 @@ class SalesEngine
     merch_arr
   end
 
+  def most_sold_item_for_merchant(merchant_ids)
+    invoices_id_hash = @invoices.best_item_for_merchant(merch_id)
+
+    invoice_ids_and_i_items_hash =
+    @invoice_items.get_inv_items_from_invoice_ids(invoices_id_hash)
+    paid_i_items_hash = Hash.new
+    invoice_ids_and_i_items_hash.each do |k, v|
+      paid_i_items_hash[k] = remove_unpaid_invoice_items(v)
+    end
+    find_most_sold_i_items(paid_i_items_hash)
+  end
+
+   def find_most_sold_i_items(paid_i_items_hash)
+     
+   end
+
+  def merchants_with_only_one_item_registered_in_month(month)
+    month = get_month(month)
+    merchants = merchants_with_only_one_item
+    merch_arr = []
+    merchants.each do |merchant|
+      date = merchant.created_at.split "-"
+      if date[1] == month
+        merch_arr << merchant
+      end
+    end
+    merch_arr
+  end
+
+  def get_month(month)
+    case month
+    when "January" then "01"
+    when "February" then "02"
+    when "March" then "03"
+    when "April" then "04"
+    when "May" then "05"
+    when "June" then "06"
+    when "July" then "07"
+    when "August" then "08"
+    when "September" then "09"
+    when "October" then "10"
+    when "November" then "11"
+    when "December" then "12"
+    end
+  end
+
 end
