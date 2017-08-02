@@ -248,11 +248,11 @@ class SalesEngine
       v.each do |i_item|
         totals << i_item.quantity * i_item.unit_price
       end
-      binding.pry
+
       items_and_i_items_hash[k] = totals.inject(:+)
-      binding.pry
+      
     end
-    binding.pry
+
     item_to_find = items_and_i_items_hash.key(items_and_i_items_hash.values.max)
     @items.find_by_id(item_to_find)
   end
