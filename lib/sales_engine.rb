@@ -294,21 +294,16 @@ class SalesEngine
 
    def find_most_sold_i_items(paid_i_items_hash)
      paid_i_items_hash.delete_if {|k, v| v.empty?}
-     paid_i_items_hash.each do |k, v|
-       totals = []
-       v.each do |i_item|
-         totals << i_item.quantity
-       end
-       paid_i_items_hash[k] = totals.inject(:+)
-       end
-       quantity_max = paid_i_items_hash.values.max
-       binding.pry
-       item_to_find = []
-       paid_i_items_hash.each do |item_id, quantity|
-         if quantity == quantity_max
-           item_to_find << item_id
-          end
-       end
+     i_items = paid_i_items_hash.values.flatten
+      sorted_i_items = i_items.sort_by do |i_item|
+        i_item.quantity
+      end.reverse
+      top_i_items = sorted_i_items.find_all do |i_item|
+        i_item.quantity == sorted_i_items[0].quantity
+      end
+      item_to_find = top_i_items.map do |i_item|
+        i_item.item_id
+      end
        @items.find_multiple_item_ids(item_to_find)
    end
 
