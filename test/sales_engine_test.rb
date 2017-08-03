@@ -67,4 +67,12 @@ class SalesEngineTest < Minitest::Test
     assert_equal 12334208, invoice.merchant.id
   end
 
+  def test_it_can_get_months
+    input = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+    expected = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+
+    assert_equal expected, input.map {|month| @se.get_month(month)}
+  end
+
 end

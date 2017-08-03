@@ -47,4 +47,8 @@ class InvoiceTest < Minitest::Test
     assert_equal true, @invoice.is_paid_in_full?
   end
 
+  def test_it_can_find_total
+    assert_equal 0.1301863e5, @invoice.total
+  end
+
 end

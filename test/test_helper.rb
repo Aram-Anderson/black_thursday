@@ -2,6 +2,7 @@ require 'simplecov'
 require 'minitest/nyan_cat'
 SimpleCov.start do
   add_filter 'test/'
+  add_filter 'lib/day_of_week'
 end
 
 require_relative 'item_repo_test'

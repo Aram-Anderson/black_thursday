@@ -152,28 +152,11 @@ class ItemRepo
     (array.inject(:+) / array.length)
   end
 
-  def best_item_for_merchant(merch_id)
-    item_id_hash = Hash.new
-    array_of_item_ids = []
-    @items.each do |item|
-      if item.merchant_id == merch_id
-        array_of_item_ids << item.id
-      end
-    end
-    array_of_item_ids.each do |item_id|
-      item_id_hash[item_id] = []
-    end
-    @sales_engine.pass_item_id_hash(item_id_hash)
-  end
-
   def merchants_with_only_one_item(merchant_ids)
       merchant_ids.each do |merch_id, arr|
-      merchant_ids[merch_id] =   find_all_by_merchant_id(merch_id)
+      merchant_ids[merch_id] = find_all_by_merchant_id(merch_id)
       end
       merchant_ids.delete_if {|merch_id, arr| arr.length !=1}
       @sales_engine.collect_merchants_with_only_one_item(merchant_ids)
   end
-
-  
-
 end

@@ -45,9 +45,4 @@ class TransactionRepo
   def get_invoice_from_transaction(invoice_id)
     @sales_engine.get_invoice_from_transaction(invoice_id)
   end
-
-  def find_pending_invoices(hash_of_merchants_and_invoice_ids)
-    find_pending_invoices_helper1(hash_of_merchants_and_invoice_ids)
-  end
-
 end

@@ -86,7 +86,6 @@ class InvoiceItemRepo
       invoices_id_hash[invoice_id] = i_item_array
     end
     create_new_hash_of_item_id_i_item(invoices_id_hash)
-    # @sales_engine.all_item_i_items(item_id_hash)
   end
 
   def create_new_hash_of_item_id_i_item(invoices_id_hash)
@@ -98,7 +97,7 @@ class InvoiceItemRepo
     item_id_i_item_hash
   end
 
-  def get_inv_items_from_invoice_ids_for_most_sold(invoices_id_hash)
+  def get_inv_items_from_inv_ids_most_sold(invoices_id_hash)
     invoices_id_hash.each do |invoice_id, i_item|
       i_item_array = []
       @invoice_items.each do |i_item|
@@ -109,7 +108,6 @@ class InvoiceItemRepo
       invoices_id_hash[invoice_id] = i_item_array
     end
     create_new_hash_of_item_id_i_item_for_most_sold(invoices_id_hash)
-    # @sales_engine.all_item_i_items(item_id_hash)
   end
 
   def create_new_hash_of_item_id_i_item_for_most_sold(invoices_id_hash)
