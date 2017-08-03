@@ -1,5 +1,5 @@
 require 'simplecov'
-require 'minitest/nyan_cat'
+require 'minitest/pride'
 SimpleCov.start do
   add_filter 'test/'
   add_filter 'lib/day_of_week'
